@@ -29,7 +29,7 @@ import { users } from "@/api/user/user";
 export default {
   data() {
     return {
-      tableData: []//test
+      tableData: []
     };
   },
   created() {
