@@ -79,7 +79,7 @@ export default {
   //     })
   //   }
   // },
-  // mounted: function() {}
+   mounted: function() {}
 };
 </script>
 <style>
