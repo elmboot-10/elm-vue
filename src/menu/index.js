@@ -1,7 +1,7 @@
 import articleManage from "./articleManage.js";
 import userManage from "./userManage.js";
 import staffEnro from "./staffEnro.js";
-
+import mypostManege from "./mypostManege.js";
 /**
  * 首页
  * @type {{name: string, path: string, icon: string}}
@@ -18,5 +18,6 @@ export default {
   articleManage,
   userManage,
   staffEnro,
+  mypostManege,
   //helpCenter
 };
