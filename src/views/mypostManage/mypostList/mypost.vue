@@ -10,7 +10,7 @@
           <el-dropdown-item>删除</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <span>王小虎</span>
+      <span>杨博汇</span>
     </el-header>
 
     <el-main>
@@ -44,7 +44,7 @@ export default {
     return { tableData: [] };
   },
   created() {
-    posts()
+    myposts()
       .then(r => {
         this.tableData = r;
       })
