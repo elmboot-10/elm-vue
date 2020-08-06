@@ -1,19 +1,10 @@
 <template>
   <div>
     <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="userId" label="用户账号"></el-table-column>
-      <el-table-column prop label="性别">
-        <template slot-scope="s">
-          <span v-if="s.row.userSex==1">男</span>
-          <span v-else>女</span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="userName" label="用户名"></el-table-column>
-      <el-table-column prop label="头像">
-        <template slot-scope="s">
-          <img :src="s.row.userImg" alt />
-        </template>
-      </el-table-column>
+      <el-table-column prop="deptNo" label="部门编号"></el-table-column>
+      <el-table-column prop="deptName" label="部门名称"></el-table-column>
+      <el-table-column prop="deptLoc" label="地点"></el-table-column>
+
       <el-table-column fixed="right" label="操作" width="240">
         <div slot-scope="s">
           <el-button type="primary" size="small" @click="routeDemo(s.row)">编辑</el-button>
@@ -22,15 +13,18 @@
       </el-table-column>
     </el-table>
   </div>
-</template> 
+</template>
+
 <script>
-import { users } from "@/api/user/user";
+import { depts } from "@/api/deptManage/dept";
 export default {
   data() {
-    return { tableData: [] };
+    return {
+      tableData: []
+    };
   },
   created() {
-    users()
+    depts()
       .then(r => {
         this.tableData = r;
       })
@@ -50,6 +44,15 @@ export default {
       })
         .then(() => {
           row.d = 0;
+          // updateStatus({ id: row.id})
+          //   .then(r => {
+          //     this.$message({
+          //       type: "success",
+          //       message: "操作成功!"
+          //     });
+          //     this.refresh();
+          //   })
+          //   .catch(() => {});
         })
         .catch(() => {});
     }
