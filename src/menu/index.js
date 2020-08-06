@@ -1,4 +1,4 @@
-import articleManage from "./articleManage.js";
+import deptManage from "./deptManage.js";
 import userManage from "./userManage.js";
 import staffEnro from "./staffEnro.js";
 import mypostManege from "./mypostManage.js";
@@ -15,7 +15,7 @@ let home = {
 
 export default {
   home,
-  articleManage,
+  deptManage,
   userManage,
   staffEnro,
   mypostManege,
