@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Layout from "@/views/layout/App.vue";
-import ArticleManage from "./articleManage";
+import DeptManage from "./deptManage";
 import UserManage from "./userManage";
 import StaffEnro from "./staffEnro";
 import PostManage from "./mypost";
@@ -27,7 +27,7 @@ const routes = [
       },
     ],
   },
-  ArticleManage,
+  DeptManage,
   UserManage,
   StaffEnro,
   PostManage,
