@@ -17,5 +17,14 @@ export default {
       component: (resolve) =>
         require(["@/views/staffEnro/dataEntry/Index.vue"], resolve),
     },
+    {
+      path: "labour_pool",
+      name: "SearchLabourPool",
+      meta: {
+        title: "人才库检索",
+      },
+      component: (resolve) =>
+        require(["@/views/staffEnro/labourPool/Index.vue"], resolve),
+    },
   ],
 };

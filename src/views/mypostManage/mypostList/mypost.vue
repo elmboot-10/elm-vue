@@ -44,7 +44,7 @@ export default {
     return { tableData: [] };
   },
   created() {
-    posts()
+    myposts()
       .then(r => {
         this.tableData = r;
       })
