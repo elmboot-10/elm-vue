@@ -62,21 +62,19 @@ export default {
   methods: {
      login() {
         this.$router.push("/");
-  //     this.$axios
-  //     .post('/login',{
-  //       username:this.loginForm.username,
-  //       password:this.loginForm.password,
-  //       user:this.loginForm.user
-  //     })
-  //     .then(successResponse =>{
-  //       if(successResponse.data.code === 200)
-  //       {
-  //         this.$router.replace({path:'/index'})
-  //       }
-  //     })
-  //     .catch(failResponse =>{
-  //       console.log("error!")
-  //     })
+       this.$axios
+       .post('/login',{
+         username:this.loginForm.username,
+         password:this.loginForm.password,
+         user:this.loginForm.user
+       })
+      //  .then(successResponse =>{
+      //    if(successResponse.data.code === 200)
+      //    {
+      //      this.$router.replace({path:'/index'})
+      //    }
+      //  })
+      //  .catch(failResponse =>{})
      }
   },
    mounted: function() {}
