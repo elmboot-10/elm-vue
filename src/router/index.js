@@ -4,7 +4,7 @@ import Layout from "@/views/layout/App.vue";
 import ArticleManage from "./articleManage";
 import UserManage from "./userManage";
 import StaffEnro from "./staffEnro";
-
+import PostManage from "./mypost";
 Vue.use(VueRouter);
 
 const routes = [
@@ -30,6 +30,7 @@ const routes = [
   ArticleManage,
   UserManage,
   StaffEnro,
+  PostManage,
   {
     path: "/login",
     name: "Login",

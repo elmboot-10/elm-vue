@@ -1,9 +1,9 @@
 import Layout from "@/views/layout/App.vue";
 export default {
-  path: "/post_manage",
+  path: "/mypost_manage",
   component: Layout,
   name: "PostManage",
-  redirect: "/post_manage/list",
+  redirect: "/mypost_manage/list",
   meta: {
     title: "用户管理",
   },
