@@ -59,7 +59,7 @@ export default {
         responseResult:[]
     }
   },
-  // methods: {
+  methods: {
   //   login() {
   //     // this.$router.push("/");
   //     this.$axios
@@ -78,7 +78,7 @@ export default {
   //       console.log("error!")
   //     })
   //   }
-  // },
+  },
    mounted: function() {}
 };
 </script>
