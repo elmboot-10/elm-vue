@@ -60,8 +60,8 @@ export default {
     }
   },
   methods: {
-  //   login() {
-  //     // this.$router.push("/");
+     login() {
+        this.$router.push("/");
   //     this.$axios
   //     .post('/login',{
   //       username:this.loginForm.username,
@@ -77,7 +77,7 @@ export default {
   //     .catch(failResponse =>{
   //       console.log("error!")
   //     })
-  //   }
+     }
   },
    mounted: function() {}
 };
