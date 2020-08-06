@@ -6,12 +6,12 @@ export default {
       courseCardList: {
         name: "岗位信息管理1",
         permissionsKey: "",
-        path: "/post_manage/list",
+        path: "/mypost_manage/list",
       },
       organCardList: {
         name: "岗位信息管理2",
         permissionsKey: "",
-        path: "/post_manage/waiting",
+        path: "/mypost_manage/waiting",
       },
     },
   };
