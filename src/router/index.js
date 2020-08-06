@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Layout from "@/views/layout/App.vue";
 import ArticleManage from "./articleManage";
 import UserManage from "./userManage";
+import StaffEnro from "./staffEnro";
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,7 @@ const routes = [
   },
   ArticleManage,
   UserManage,
+  StaffEnro,
   {
     path: "/login",
     name: "Login",

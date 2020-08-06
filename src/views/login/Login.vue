@@ -82,7 +82,7 @@ export default {
 </script>
 <style>
   #poster {
-    /* background: url("../assets/thresh.jpeg") no-repeat; */
+    /* background: url("../../assets/thresh.jpeg") no-repeat; */
     background-position: center;
     height: 100%;
     width: 100%;
@@ -90,6 +90,8 @@ export default {
     position: fixed;
   }
   body{
+    background:url("../../assets/thresh.jpeg");
+    background-position: center;
     margin: 0px;
     padding: 0;
   }
