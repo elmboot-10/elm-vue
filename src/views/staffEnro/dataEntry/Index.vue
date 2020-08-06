@@ -36,16 +36,16 @@
                 <el-date-picker v-model="value3" type="date" placeholder="选择日期"></el-date-picker>
               </el-form-item>
               <el-form-item label="用工形式" required>
-                <el-select placeholder="用工形式">
-                  <el-option label="正式员工"></el-option>
-                  <el-option label="实习员工"></el-option>
+                <el-select placeholder="用工形式" v-model="form.ygxs">
+                  <el-option label="正式员工" value="zsyg"></el-option>
+                  <el-option label="实习员工" value="sxyg"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="人员来源" required>
-                <el-select placeholder="选择来源">
-                  <el-option label="校园招聘"></el-option>
-                  <el-option label="社会招聘"></el-option>
-                  <el-option label="其他"></el-option>
+                <el-select placeholder="选择来源" v-model="form.ryly">
+                  <el-option label="校园招聘" value="xyzp"></el-option>
+                  <el-option label="社会招聘" value="shzp"></el-option>
+                  <el-option label="其他" value="other"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="联系电话" required>
@@ -102,6 +102,10 @@
 export default {
   data() {
     return {
+      form:{
+        ygxs:"",
+        ryly:"",
+      },
       pickerOptions: {
         disabledDate(time) {
           return time.getTime() > Date.now();
