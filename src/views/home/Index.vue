@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card style="border-radius: 0">
+  <!--   <el-card style="border-radius: 0">
       <div slot="header">
         <span>概况</span>
       </div>
@@ -10,9 +10,7 @@
             <div class="grid-content ">
               <div style="padding: 10px;background: #673AB7">
                 <i class="el-icon-location-outline index-icon"></i>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Dignissimos earum enim fugiat illum iusto minus modi nam natus
-                nisi sequi!
+             
               </div>
             </div>
           </el-col>
@@ -20,9 +18,7 @@
             <div class="grid-content ">
               <div style="padding: 10px;background: #3c8dbc">
                 <i class="el-icon-picture index-icon"></i>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Dignissimos earum enim fugiat illum iusto minus modi nam natus
-                nisi sequi!
+              
               </div>
             </div>
           </el-col>
@@ -30,9 +26,7 @@
             <div class="grid-content ">
               <div style="padding: 10px;background: #009688">
                 <i class="el-icon-service index-icon"></i>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Dignissimos earum enim fugiat illum iusto minus modi nam natus
-                nisi sequi!
+              
               </div>
             </div>
           </el-col>
@@ -40,9 +34,7 @@
             <div class="grid-content ">
               <div style="padding: 10px;background: #607D8B">
                 <i class="el-icon-bell index-icon"></i>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Dignissimos earum enim fugiat illum iusto minus modi nam natus
-                nisi sequi!
+                
               </div>
             </div>
           </el-col>
@@ -136,7 +128,7 @@
           </div>
         </el-col>
       </el-row>
-    </el-card>
+    </el-card> -->
   </div>
 </template>
 

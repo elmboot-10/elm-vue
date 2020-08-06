@@ -7,7 +7,7 @@ import userManage from "./userManage.js";
  */
 let home = {
   name: "首页",
-  path: "/",
+  path: "/home",
   permissionsKey: "",
   icon: "fa fa-tachometer",
 };

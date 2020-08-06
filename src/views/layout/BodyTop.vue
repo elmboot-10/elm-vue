@@ -27,11 +27,11 @@
           </div>
         </el-dropdown-menu>
       </el-dropdown>
-      <span class="body-top-btn">
+      <!-- <span class="body-top-btn">
         <el-badge is-dot class="badge">
           <i class="el-icon-bell"></i>
         </el-badge>
-      </span>
+      </span> -->
       <el-dropdown>
         <span class="body-top-btn">
           {{ userName }}

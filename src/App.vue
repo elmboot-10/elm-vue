@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <router-view name="blank" />
-    <router-view />
+    <router-view name="login" />    <router-view />
   </div>
 </template>
