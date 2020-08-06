@@ -12,9 +12,9 @@ const routes = [
     path: "/",
     component: Layout,
     name: "Dashboard",
-    redirect: "/home",
+    redirect: "/login",
     meta: {
-      title: "仪表盘",
+      title: "",
     },
     children: [
       {
@@ -38,7 +38,7 @@ const routes = [
       keepAlive: false,
     },
     components: {
-      blank: (resolve) => require(["@/views/login/Login.vue"], resolve),
+      login: (resolve) => require(["@/views/login/Login.vue"], resolve),
     },
   },
 ];

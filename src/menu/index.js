@@ -8,7 +8,7 @@ import staffEnro from "./staffEnro.js";
  */
 let home = {
   name: "首页",
-  path: "/",
+  path: "/home",
   permissionsKey: "",
   icon: "fa fa-tachometer",
 };

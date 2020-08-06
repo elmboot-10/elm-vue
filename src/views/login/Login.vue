@@ -61,7 +61,7 @@ export default {
   },
   methods: {
      login() {
-        this.$router.push("/");
+       this.$router.push("/home");
        this.$axios
        .post('/login',{
          username:this.loginForm.username,
