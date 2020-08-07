@@ -35,7 +35,7 @@
   </div>
 </template>
 <script>
-// import { setToken } from "@/utils/common";
+// import BodyTop from "./BodyTop.vue";
 export default {
   name: "Login",
   data() {
@@ -61,11 +61,11 @@ export default {
      login() {
       //  this.$router.push("/home");
       if (this.loginForm.username == "") {
-        this.$message.error("用户名不能为空");
+        this.$message.error("用户名不能为空!");
         return;
       }
       if (this.loginForm.password == "") {
-        this.$message.error("密码不能为空");
+        this.$message.error("密码不能为空!");
         return;
       }
       this.$axios
@@ -73,11 +73,9 @@ export default {
         .then(res => {
           let user = res.data;
           if (user == null || user == "") {
-            this.$message.error("用户名或密码不正确");
+            this.$message.error("用户名或密码不正确！");
             return false;
           } else {
-            //缓存用户信息,清空图片缓存，数据量大有可能溢出，所以不要将图片放入SessionStorage中
-            //user.userImg = "";
             this.$setSessionStorage("user", user);
             this.$router.push({ path: "/home" });
           }
@@ -85,9 +83,11 @@ export default {
         .catch(e => {
           console.log(e);
         })
-   },
-   regitster(){}
-  }
+        },
+          regitster(){
+
+          }
+  },
 };
 </script>
 <style>

@@ -59,8 +59,11 @@ export default {
   data() {
     return {
       menu: Menu,
-      userName: "Admin"
+      userName: "未登录",
     };
+  },
+  mounted() {
+      this.userName = this.$getSessionStorage("user").username;
   },
   methods: {
     hiddenSidebar() {
@@ -76,7 +79,11 @@ export default {
           });
         });
     },
-    logout() {}
+    logout() {
+      this.$removeSessionStorage("user");
+      this.isLogin = false;
+      this.$router.push({ path: "/login" });
+    }
   },
   computed: mapState(["system"])
 };
