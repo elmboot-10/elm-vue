@@ -23,7 +23,15 @@
         </el-table-column>
       </el-table>
     </el-main>
+    <div class="block">
+  <span class="demonstration">1</span>
+  <el-pagination
+    layout="prev, pager, next"
+    :total="50">
+  </el-pagination>
+</div>
   </el-container>
+  
 </el-container>
 </template>
 <style>
