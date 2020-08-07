@@ -69,7 +69,7 @@ export default {
         return;
       }
       this.$axios
-      .post("user/login", this.$qs.stringify(this.loginForm))
+      .post("figure/login", this.$qs.stringify(this.loginForm))
         .then(res => {
           let user = res.data;
           if (user == null || user == "") {
