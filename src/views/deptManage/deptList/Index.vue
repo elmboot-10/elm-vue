@@ -1,9 +1,11 @@
 <template>
   <div>
      <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="deptNo" label="部门编号"></el-table-column>
-      <el-table-column prop="deptName" label="部门"></el-table-column>
-      <el-table-column prop="deptName" label="所在地"></el-table-column>
+      <el-table-column prop="deptno" label="部门编号"></el-table-column>
+      <el-table-column prop="dname" label="部门"></el-table-column>
+      <el-table-column prop="location" label="所在地"></el-table-column>
+      <el-table-column prop="tel" label="部门电话"></el-table-column>
+      <el-table-column prop="setuptime" label="成立时间"></el-table-column>
     
       <el-table-column fixed="right" label="操作" width="240">
         <div slot-scope="s">
