@@ -1,9 +1,9 @@
 <template>
   <div>
-      <el-form class="login-container" label-position="left" label-width="0vw" >
+      <el-form :model="loginForm" class="login-container" label-position="left" label-width="0vw" >
           <h3 class="login_title">系统登录</h3>
           <el-form-item>
-            <el-input type="text" v-model="loginForm.user.name" auto-complete="off" placeholder="账号"></el-input>
+            <el-input type="text" v-model="loginForm.username" auto-complete="off" placeholder="账号"></el-input>
           </el-form-item>
           <el-form-item>
             <el-input type="password" v-model="loginForm.password" auto-complete="off" placeholder="密码"></el-input>
@@ -26,10 +26,10 @@
           </el-form-item>
 
           <el-form-item>
-            <el-button type="primary" style="width: 100%;background: #505458;border: none" @click="login">登陆</el-button>
+            <el-button type="primary" style="width: 100%;background: #505458;border: none" @click="login()">登陆</el-button>
           </el-form-item>
            <el-form-item>
-            <el-button type="primary" style="width: 100%;background: #505458;border: none" @click="register">注册</el-button>
+            <el-button type="primary" style="width: 100%;background: #505458;border: none" @click="register()">注册</el-button>
           </el-form-item>
       </el-form>
   </div>
@@ -55,34 +55,43 @@ export default {
           value: '选项3',
           label: '用户'
         }]
-        ,value: '',
-        responseResult:[]
     }
   },
   methods: {
      login() {
-       this.$router.push("/home");
-       this.$axios
-       .post('/login',{
-         username:this.loginForm.username,
-         password:this.loginForm.password,
-         user:this.loginForm.user
-       })
-      //  .then(successResponse =>{
-      //    if(successResponse.data.code === 200)
-      //    {
-      //      this.$router.replace({path:'/index'})
-      //    }
-      //  })
-      //  .catch(failResponse =>{})
-     }
-  },
-   mounted: function() {}
+      //  this.$router.push("/home");
+      if (this.loginForm.username == "") {
+        this.$message.error("用户名不能为空");
+        return;
+      }
+      if (this.loginForm.password == "") {
+        this.$message.error("密码不能为空");
+        return;
+      }
+      this.$axios
+      .post("user/login", this.$qs.stringify(this.loginForm))
+        .then(res => {
+          let user = res.data;
+          if (user == null || user == "") {
+            this.$message.error("用户名或密码不正确");
+            return false;
+          } else {
+            //缓存用户信息,清空图片缓存，数据量大有可能溢出，所以不要将图片放入SessionStorage中
+            //user.userImg = "";
+            this.$setSessionStorage("user", user);
+            this.$router.push({ path: "/home" });
+          }
+        })
+        .catch(e => {
+          console.log(e);
+        })
+   },
+   regitster(){}
+  }
 };
 </script>
 <style>
   #poster {
-    /* background: url("../../assets/thresh.jpeg") no-repeat; */
     background-position: center;
     height: 100%;
     width: 100%;
@@ -90,7 +99,7 @@ export default {
     position: fixed;
   }
   body{
-    background:url("../../assets/thresh.jpeg");
+    /* background:url("../../assets/thresh.jpeg"); */
     background-position: center;
     margin: 0px;
     padding: 0;
