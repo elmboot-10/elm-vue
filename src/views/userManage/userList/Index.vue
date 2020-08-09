@@ -1,9 +1,10 @@
 <template>
   <div>
-    <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="usernum" label="序号"></el-table-column>
-      <el-table-column prop="userempno" label="工号"></el-table-column>
-      <el-table-column prop="username" label="姓名"></el-table-column>
+    <el-table>
+
+      <el-table-column prop="num" label="序号"></el-table-column>
+      <el-table-column prop="empno" label="工号"></el-table-column>
+      <el-table-column prop="ename" label="姓名"></el-table-column>
       <el-table-column prop="birth" label="出生年月"></el-table-column>
       <el-table-column prop="idnum" label="身份证号"></el-table-column>
       <el-table-column prop="deptno" label="所在部门"></el-table-column>
@@ -11,6 +12,7 @@
       <el-table-column prop="entime" label="入职时间"></el-table-column>
       <el-table-column prop="wtime" label="工作时间"></el-table-column>
       <el-table-column prop="form" label="员工类型"></el-table-column>
+
 
       <el-table-column prop="resource" label="入职来源"></el-table-column>
    
@@ -23,6 +25,7 @@
           <el-button type="primary" size="small" @click="routeDemo(s.row)">编辑</el-button>
           <el-button type="danger" size="small" @click="removeItem(s.row)">删除</el-button>
         </div>
+      
       </el-table-column>
    
     </el-table>

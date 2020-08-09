@@ -13,12 +13,12 @@ const routes = [
     component: Layout,
     name: "Dashboard",
     redirect: "/login",
-    meta: {
-      title: "",
-    },
+    // meta: {
+    //   title: "",
+    // },
     children: [
       {
-        path: "home",
+        path: "/home",
         name: "DashboardHome",
         meta: {
           title: "首页",
