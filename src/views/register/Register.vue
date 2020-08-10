@@ -1,16 +1,17 @@
 <template>
   <div>
-      <el-form :model="loginForm" class="login-container" label-position="left" label-width="0vw" >
-          <h3 class="login_title">系统登录</h3>
+    <router-view></router-view>
+      <el-form :model="registerForm" class="register-container" label-position="left" label-width="0vw" >
+          <h3 class="register_title">用户注册</h3>
           <el-form-item>
-            <el-input type="text" v-model="loginForm.username" auto-complete="off" placeholder="账号"></el-input>
+            <el-input type="text" v-model="registerForm.username" auto-complete="off" placeholder="账号"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-input type="password" v-model="loginForm.password" auto-complete="off" placeholder="密码"></el-input>
+            <el-input type="password" v-model="registerForm.password" auto-complete="off" placeholder="密码"></el-input>
           </el-form-item>
           
            <el-form-item>
-            <el-select v-model="loginForm.user"  style="width: 100%;" placeholder="请选择">
+            <el-select v-model="registerForm.user"  style="width: 100%;" placeholder="请选择">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -21,24 +22,23 @@
           </el-form-item>
 
           <el-form-item>
-            <el-button type="primary" style="width: 100%;background: #505458;border: none" @click="login()">登录</el-button>
+            <el-button type="primary" style="width: 100%;background: #505458;border: none" @click="tologin()">去登录</el-button>
           </el-form-item>
-           <el-form-item>
-            <el-button type="primary" style="width: 100%;background: #505458;border: none" @click="register()">注册</el-button>
-          </el-form-item>
+        
       </el-form>
   </div>
 </template>
+
 <script>
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {
-        loginForm: {
+        registerForm: {
           username:'',
           password:'',
-          user:''},
-        options: [{
+          user:''}, 
+          options: [{
           value: '选项1',
           label: '管理员'
         },
@@ -52,18 +52,17 @@ export default {
     }
   },
   methods: {
-     login() {
-      //  this.$router.push("/home");
-      if (this.loginForm.username == "") {
+     register() {
+      if (this.registerForm.username == "") {
         this.$message.error("用户名不能为空!");
         return;
       }
-      if (this.loginForm.password == "") {
+      if (this.registerForm.password == "") {
         this.$message.error("密码不能为空!");
         return;
       }
       this.$axios
-      .post("figure/login", this.$qs.stringify(this.loginForm))
+      .post("figure/register", this.$qs.stringify(this.registerForm))
         .then(res => {
           let user = res.data;
           if (user == null || user == "") {
@@ -71,15 +70,15 @@ export default {
             return false;
           } else {
             this.$setSessionStorage("user", user);
-            this.$router.push({ path: "/home" });
+            this.$router.push({ path: "/login" });
           }
         })
         .catch(e => {
           console.log(e);
         })
         },
-          register(){
-            this.$router.push({ path: "/register" ,name:"Register" });
+          tologin(){
+            this.$router.push({ path: "/login" });
           }
   },
 };
@@ -93,12 +92,11 @@ export default {
     position: fixed;
   }
   body{
-    /* background:url("../../assets/thresh.jpeg"); */
     background-position: center;
     margin: 0px;
     padding: 0;
   }
-  .login-container {
+  .register-container {
     border-radius: 15px;
     background-clip: padding-box;
     margin: 90px auto;
@@ -109,7 +107,7 @@ export default {
     box-shadow: 0 0 25px #cac6c6;
   }
  
-  .login_title {
+  .register_title {
     margin: 0px auto 40px auto;
     text-align: center;
     color: #505458;

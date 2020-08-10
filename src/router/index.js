@@ -42,6 +42,16 @@ const routes = [
       login: (resolve) => require(["@/views/login/Login.vue"], resolve),
     },
   },
+  {
+    path: "/register",
+    name: "Register",
+    meta: {
+      title: "后台注册",
+    },
+    components: {
+      register: (resolve) => require(["@/views/register/Register.vue"], resolve),
+    },
+  },
 ];
 
 const originalPush = VueRouter.prototype.push;
