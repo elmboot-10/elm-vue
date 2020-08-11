@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table>
+    <el-table :data="tableData" border style="width: 100%">
 
       <el-table-column prop="num" label="序号"></el-table-column>
       <el-table-column prop="empno" label="工号"></el-table-column>
@@ -29,6 +29,7 @@
       </el-table-column>
    
     </el-table>
+    <el-button type="primary" @click="add()">新增用户</el-button>
   </div>
 </template>
 
@@ -72,7 +73,10 @@ export default {
           //   .catch(() => {});
         })
         .catch(() => {});
-    }
+    },
+    add(){
+            this.$router.push({ path: "/add" ,name:"Add" });
+          }
   }
 };
 </script>
