@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table :data="tableData" border style="width: 100%">
+    <el-table :data="tableData" border style="width: 100%" >
 
       <el-table-column prop="num" label="序号"></el-table-column>
       <el-table-column prop="empno" label="工号"></el-table-column>
