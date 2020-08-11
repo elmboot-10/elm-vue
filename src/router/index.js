@@ -65,6 +65,16 @@ const routes = [
      blank: (resolve) => require(["@/views/add/Add.vue"], resolve),
     },
   },
+  {
+    path: "/instpost",
+    name: "instPost",
+    meta: {
+      title: "添加岗位",
+    },
+    components: {
+     blank: (resolve) => require(["@/views/mypostManage/mypostList/addpost.vue"], resolve),
+    },
+  },
 ];
 
 const originalPush = VueRouter.prototype.push;

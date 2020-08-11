@@ -20,24 +20,27 @@
          </el-table-column>
 
          <el-table-column  label="改" width="100">
-          <div >
-            <el-button  type="primary" icon="el-icon-edit"  @click="changeDemo"></el-button>
+          <div slot-scope="s">
+            <el-button  type="primary" icon="el-icon-edit"  @click="changeDemo(s.row)"></el-button>
           </div>
          </el-table-column>
 
          <el-table-column  label="删" width="100">
-          <div >
-            <el-button type="primary" icon="el-icon-delete" @click="removeItem"></el-button>
+          <div slot-scope="s">
+            <el-button type="primary" icon="el-icon-delete" @click="removeItem(s.row)"></el-button>
           </div>
          </el-table-column>
 
-          <el-table-column  label="查" width="100">
+        <el-table-column  label="查" width="100">
           <div >
             <el-button type="primary" icon="el-icon-search" @click="searchItem"></el-button>
           </div>
-         </el-table-column>
+        </el-table-column>
       
       </el-table>
+      <div style="text-align:left">
+      <el-button type="text"  icon="el-icon-circle-plus" @click="toinsert">添加岗位</el-button>
+      </div>
     </el-main>
      
   
@@ -76,14 +79,17 @@ export default {
   },
   methods: {
     changeDemo() {
-    
+    this.$message.info("待添加");
     },
     removeItem() {
-     
+     this.$message.info("待添加");
     },
-    searchIdem(){
-
+    searchItem(){
+    this.$message.info("待添加");
     },
+    toinsert() {
+        this.$router.push({ path: "/instpost" ,name:"instPost" });
+      }
   }
 };
 </script>
