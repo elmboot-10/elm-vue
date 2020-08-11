@@ -30,6 +30,7 @@
   </div>
 </template>
 <script>
+import { setToken } from "@/utils/common";
 export default {
   name: "Login",
   data() {
@@ -65,11 +66,13 @@ export default {
       this.$axios
       .post("figure/login", this.$qs.stringify(this.loginForm))
         .then(res => {
+          console.log(res);
           let user = res.data;
-          if (user == null || user == "") {
+          if (user == null || user =="") {
             this.$message.error("用户名或密码不正确！");
             return false;
-          } else {
+          } else {  
+            setToken("HJDF844GDFG5D8J7FGHFG5");       
             this.$setSessionStorage("user", user);
             this.$router.push({ path: "/home" });
           }
