@@ -5,6 +5,7 @@ import DeptManage from "./deptManage";
 import UserManage from "./userManage";
 import StaffEnro from "./staffEnro";
 import PostManage from "./mypost";
+import LeaveManage from "./leaveManage";
 Vue.use(VueRouter);
 
 const routes = [
@@ -31,6 +32,7 @@ const routes = [
   UserManage,
   StaffEnro,
   PostManage,
+  LeaveManage,
   {
     path: "/login",
     name: "Login",
@@ -39,7 +41,7 @@ const routes = [
       keepAlive: false,
     },
     components: {
-      login: (resolve) => require(["@/views/login/Login.vue"], resolve),
+      blank: (resolve) => require(["@/views/login/Login.vue"], resolve),
     },
   },
   {
@@ -49,7 +51,18 @@ const routes = [
       title: "后台注册",
     },
     components: {
-      register: (resolve) => require(["@/views/register/Register.vue"], resolve),
+      blank: (resolve) => require(["@/views/register/Register.vue"], resolve),
+    },
+  },
+
+  {
+    path: "/add",
+    name: "Add",
+    meta: {
+      title: "新增用户",
+    },
+    components: {
+     blank: (resolve) => require(["@/views/add/Add.vue"], resolve),
     },
   },
 ];

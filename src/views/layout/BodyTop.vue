@@ -63,7 +63,10 @@ export default {
     };
   },
   mounted() {
+      let user=this.$getSessionStorage("user");
+    if(user !=null){
       this.userName = this.$getSessionStorage("user").username;
+    }
   },
   methods: {
     hiddenSidebar() {
