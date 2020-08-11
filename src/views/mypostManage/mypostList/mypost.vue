@@ -14,35 +14,32 @@
         </el-table-column>
         <el-table-column prop="jtype" label="岗位类型" width="100">
         </el-table-column>
-        <!-- <div slot-scope="s">
-          <el-button type="primary" size="small" >编辑</el-button>
-          <el-button type="danger" size="small" >删除</el-button>
-        </div> -->
+       
            <el-table-column  label="最大限制人数" width="150">
             
          </el-table-column>
 
          <el-table-column  label="改" width="100">
-          <div>
-          <el-tooltip class="item" effect="dark" content="！" placement="top-start">
-            <el-button icon="el-icon-edit"></el-button>
-            
-           </el-tooltip>
+          <div >
+            <el-button  type="primary" icon="el-icon-edit"  @click="changeDemo"></el-button>
           </div>
          </el-table-column>
 
          <el-table-column  label="删" width="100">
-          <div>
-            <el-button type="primary" icon="el-icon-delete"></el-button>
-           
-           <!-- <el-tooltip class="item" effect="dark" content="！" placement="top-start">
-            <el-button>删除</el-button>
-           </el-tooltip> -->
+          <div >
+            <el-button type="primary" icon="el-icon-delete" @click="removeItem"></el-button>
           </div>
          </el-table-column>
 
+          <el-table-column  label="查" width="100">
+          <div >
+            <el-button type="primary" icon="el-icon-search" @click="searchItem"></el-button>
+          </div>
+         </el-table-column>
+      
       </el-table>
     </el-main>
+     
   
   </el-container>
   
@@ -66,11 +63,7 @@ export default {
   data() {
     return {
        tableData: [] ,
-       num:1,
-       activeIndex: '1',
-        activeIndex2: '1',
-        url:"../../assets/loge.png"
-       };
+      };   
   },
   created() {
     myposts()
@@ -82,12 +75,15 @@ export default {
       });
   },
   methods: {
-    handleChange(value) {
-        console.log(value);
-      },
-    handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      }
+    changeDemo() {
+    
+    },
+    removeItem() {
+     
+    },
+    searchIdem(){
+
+    },
   }
 };
 </script>

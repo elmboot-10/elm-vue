@@ -23,7 +23,7 @@ export function myposts(params) {
   return request({
     // closeLoading: true,
     // closeInterceptors: true,
-    url: "/mypost/list",
+    url: "/posi/list",
     method: "get",
     params: params, //注意：如果是get请求请使用 params: params
   });
