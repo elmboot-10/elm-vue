@@ -5,6 +5,7 @@ import DeptManage from "./deptManage";
 import UserManage from "./userManage";
 import StaffEnro from "./staffEnro";
 import PostManage from "./mypost";
+import LeaveManage from "./leaveManage";
 Vue.use(VueRouter);
 
 const routes = [
@@ -31,6 +32,7 @@ const routes = [
   UserManage,
   StaffEnro,
   PostManage,
+  LeaveManage,
   {
     path: "/login",
     name: "Login",
