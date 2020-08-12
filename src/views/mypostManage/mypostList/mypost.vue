@@ -1,9 +1,9 @@
 <template>
-
+<div>
 <el-container style="height: 500; border: 1px solid #eee">
-  <el-container>
+
     <el-header style="text-align: left; font-size: 24px;font-weight:700">
-      <div>无论遇到什么困难都不要怕，微笑着面对他;消除恐惧的最好办法就是面对恐惧，加油，奥利给!!(doge)</div>
+      <div>无论遇到什么困难都不要怕，微笑着面对他。消除恐惧的最好办法就是面对恐惧，加油，奥利给(doge)</div>
     </el-header>
 
     <el-main>
@@ -15,19 +15,19 @@
         <el-table-column prop="jtype" label="岗位类型" width="100">
         </el-table-column>
        
-           <el-table-column  label="最大限制人数" width="150">
+        <el-table-column  label="最大限制人数" width="150">
             
          </el-table-column>
 
          <el-table-column  label="改" width="100">
           <div slot-scope="s">
-            <el-button  type="primary" icon="el-icon-edit"  @click="changeDemo(s.row)"></el-button>
+            <el-button  type="primary" icon="el-icon-edit"  @click="editItem(s.row.jnum)"></el-button>
           </div>
          </el-table-column>
 
          <el-table-column  label="删" width="100">
           <div slot-scope="s">
-            <el-button type="primary" icon="el-icon-delete" @click="removeItem(s.row)"></el-button>
+            <el-button type="primary" icon="el-icon-delete" @click="removeItem(s.row.jnum)"></el-button>
           </div>
          </el-table-column>
 
@@ -39,15 +39,13 @@
       
       </el-table>
       <div style="text-align:left">
-      <el-button type="text"  icon="el-icon-circle-plus" @click="toinsert">添加岗位</el-button>
+      <el-button type="text" icon="el-icon-circle-plus" @click="toinsert">添加岗位</el-button>
       </div>
     </el-main>
-     
-  
-  </el-container>
   
 </el-container>
-
+<Edit :showEditDialog="showEditDialog" @close="showEditDialog = false" @success="refresh()" />
+</div>
 </template>
 <style>
   .el-header {
@@ -61,35 +59,72 @@
   }
 </style>
 <script>
-import { myposts } from "@/api/mypost/mypost";
+import { myposts ,deletePosi} from "@/api/mypost/mypost";
+import Edit from "./Edit.vue";
 export default {
   data() {
     return {
        tableData: [] ,
+       editjnum:"",
+       showEditDialog: false,
       };   
   },
   created() {
-    myposts()
+    this.initData();
+   
+  },
+  methods: {
+   initData(){
+       myposts()
       .then(r => {
         this.tableData = r;
       })
       .catch(e => {
         console.log(e);
       });
-  },
-  methods: {
-    changeDemo() {
-    this.$message.info("待添加");
     },
-    removeItem() {
-     this.$message.info("待添加");
+    editItem(jnum) {
+  //  console.log(jnum);
+    this.editjnum=jnum;
+    this.showEditDialog = true;
+    },
+    removeItem(jnum) {
+      this.$confirm("确定删除?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          deletePosi({ jnum })
+            .then(r => {
+              if (r == 1) {
+                this.$message({
+                  type: "success",
+                  message: "操作成功!"
+                });
+                this.refresh();
+              } else {
+                this.$message({
+                  type: "error",
+                  message: "操作失败!"
+                });
+              }
+            })
+            .catch(() => {});
+        })
+        .catch(() => {});
     },
     searchItem(){
-    this.$message.info("待添加");
+     this.$message.info("待添加");
     },
     toinsert() {
         this.$router.push({ path: "/instpost" ,name:"instPost" });
-      }
-  }
+    },
+    
+    refresh() {
+      this.initData();
+    },
+  },
+  components: {Edit}
 };
 </script>
