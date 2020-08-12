@@ -84,17 +84,29 @@
 
                 <el-form-item label="职工类型" prop="form">
                 <el-select placeholder="用工形式" v-model="ruleForm.form">
-                  <el-option label="正式员工" value="regular"></el-option>
-                  <el-option label="实习员工" value="intern"></el-option>
+                  <el-option
+                   v-for="item in option1"
+                   :key="item.value"
+                   :label="item.label"
+                   :value="item.form"            
+                  >
+                  </el-option>
                 </el-select>
                 </el-form-item> 
+
+
               <el-form-item label="人员来源" prop="resource">
                 <el-select placeholder="选择来源" v-model="ruleForm.resource">
-                  <el-option label="校园招聘" value="school"></el-option>
-                  <el-option label="社会招聘" value="society"></el-option>
-                  <el-option label="其他" value="other"></el-option>
+                  <el-option   
+                   v-for="item in option2"
+                   :key="item.value"
+                   :label="item.label"
+                   :value="item.resource"                 
+                  >
+                  </el-option>  
                 </el-select>
-              </el-form-item>             
+              </el-form-item>    
+
                <el-form-item label="电话号码" prop="tel">
                 <el-input v-model="ruleForm.tel"></el-input>
               </el-form-item>
@@ -189,6 +201,27 @@ export default {
           job: "44"
         },
       ],
+       option1: [
+        {
+          value: "选项1",
+          form: "正式员工"
+        },
+        {
+          value: "选项2",
+          form: "雇佣工"
+        },
+      ],
+       option2: [
+        {
+          value: "选项1",
+          resource: "校园招聘"
+        },
+        {
+          value: "选项2",
+          resource: "社会招聘"
+        },
+      ],
+      
       rules: {
 
         empno: [
