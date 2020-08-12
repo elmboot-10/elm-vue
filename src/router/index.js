@@ -41,7 +41,7 @@ const routes = [
       keepAlive: false,
     },
     components: {
-      login: (resolve) => require(["@/views/login/Login.vue"], resolve),
+      blank: (resolve) => require(["@/views/login/Login.vue"], resolve),
     },
   },
   {
@@ -51,7 +51,28 @@ const routes = [
       title: "后台注册",
     },
     components: {
-      register: (resolve) => require(["@/views/register/Register.vue"], resolve),
+      blank: (resolve) => require(["@/views/register/Register.vue"], resolve),
+    },
+  },
+
+  {
+    path: "/add",
+    name: "Add",
+    meta: {
+      title: "新增用户",
+    },
+    components: {
+     blank: (resolve) => require(["@/views/add/Add.vue"], resolve),
+    },
+  },
+  {
+    path: "/instpost",
+    name: "instPost",
+    meta: {
+      title: "添加岗位",
+    },
+    components: {
+     blank: (resolve) => require(["@/views/mypostManage/mypostList/addpost.vue"], resolve),
     },
   },
 ];

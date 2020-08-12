@@ -4,12 +4,14 @@
       <el-form :model="registerForm" class="register-container" label-position="left" label-width="0vw" >
           <h3 class="register_title">用户注册</h3>
           <el-form-item>
-            <el-input type="text" v-model="registerForm.username" auto-complete="off" placeholder="账号"></el-input>
+            <el-input type="text" @blur="checkUserId" v-model="registerForm.username" auto-complete="off" placeholder="账号"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-input type="password" v-model="registerForm.password" auto-complete="off" placeholder="密码"></el-input>
+            <el-input type="password" v-model="registerForm.checkpassword" auto-complete="off" placeholder="密码"></el-input>
           </el-form-item>
-          
+           <el-form-item>
+            <el-input type="password" v-model="registerForm.password" auto-complete="off" placeholder="确认密码"></el-input>
+          </el-form-item>
            <el-form-item>
             <el-select v-model="registerForm.user"  style="width: 100%;" placeholder="请选择">
               <el-option
@@ -22,7 +24,11 @@
           </el-form-item>
 
           <el-form-item>
-            <el-button type="primary" style="width: 100%;background: #505458;border: none" @click="tologin()">去登录</el-button>
+            <el-button type="primary" style="width: 100%;background: #505458;border: none" @click="register">确定注册</el-button>
+          </el-form-item>
+        
+          <el-form-item>
+            <el-button type="primary" style="width: 100%;background: #505458;border: none" @click="tologin">登录</el-button>
           </el-form-item>
         
       </el-form>
@@ -37,6 +43,7 @@ export default {
         registerForm: {
           username:'',
           password:'',
+          checkpassword:'',
           user:''}, 
           options: [{
           value: '选项1',
@@ -53,7 +60,7 @@ export default {
   },
   methods: {
      register() {
-      if (this.registerForm.username == "") {
+      if (this.registerForm.username == ""||this.registerForm.username == null) {
         this.$message.error("用户名不能为空!");
         return;
       }
@@ -61,16 +68,19 @@ export default {
         this.$message.error("密码不能为空!");
         return;
       }
+      if (this.registerForm.checkpassword !=this.registerForm.password) {
+        this.$message.error("两次密码不一致!");
+        return;
+      }
       this.$axios
-      .post("figure/register", this.$qs.stringify(this.registerForm))
+      .post("figure/insert", this.$qs.stringify(this.registerForm))
         .then(res => {
           let user = res.data;
-          if (user == null || user == "") {
-            this.$message.error("用户名或密码不正确！");
-            return false;
+          if (user>0) {
+            this.$message.success("注册成功，跳转到登录界面！");
+            return ;
           } else {
-            this.$setSessionStorage("user", user);
-            this.$router.push({ path: "/login" });
+            this.$message.error("注册失败！");
           }
         })
         .catch(e => {
@@ -79,6 +89,27 @@ export default {
         },
           tologin(){
             this.$router.push({ path: "/login" });
+          },
+
+          checkUserId(){
+            this.$axios
+                .post("figure/isexistuser", this.$qs.stringify({username:this.registerForm.username}))
+                  .then(res => {
+                    if (res.data==1) {
+                      this.$message.error("用户名已存在！");
+                       return false;
+                    } else{
+                        if (this.registerForm.username == ""||this.registerForm.username == null) {
+                        this.$message.error("用户名不能为空!");
+                        return;
+                      }
+                      this.$message.success("用户名可以使用！");
+                    }
+                  })
+                    .catch(e => {
+                       this.$message.error("服务器内部发生异常，请稍后访问！");
+                       console.log(e);
+                      })
           }
   },
 };
