@@ -253,7 +253,7 @@ export default {
       }
       this.$axios
         .post(
-          "user/isexistuser",
+          "staff/isExistStaff",
           this.$qs.stringify({
             empno: this.ruleForm.empno
           })
@@ -318,7 +318,7 @@ export default {
         console.log(this.ruleForm);
         dataEntry(this.ruleForm)
           .then(res => {
-            if (res.data == 1) {
+            if (res == 1) {
               this.$message.success("员工信息已录入");
             } else {
               this.$message.error("因某些原因员工信息录入失败！");
