@@ -5,61 +5,83 @@
         <div class="demo-block">
           <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="aaa" label-width="80px">
             <div class="inLine">
-              <el-form-item label="序号" prop="num">
-                <el-input v-model="ruleForm.num"></el-input>
-              </el-form-item>
               <el-form-item label="工号" prop="empno">
                 <el-input v-model="ruleForm.empno" @blur="checkempno"></el-input>
               </el-form-item>
               <el-form-item label="姓名" prop="ename">
                 <el-input v-model="ruleForm.ename"></el-input>
               </el-form-item>
+
+
               <el-form-item label="出生日期" prop="birth">
                 <el-date-picker
                   v-model="ruleForm.birth"
                   align="right"
                   type="date"
                   placeholder="选择日期"
-                  :picker-options="pickerOptions"
-                ></el-date-picker>
+                  format="yyyy 年 MM 月 dd 日"
+                  value-format="yyyy-MM-dd"
+                >
+                </el-date-picker>
               </el-form-item>
+
+
+
+
               <el-form-item label="身份证号" prop="idnum">
                 <el-input v-model="ruleForm.idnum"></el-input>
               </el-form-item>
-                <el-form-item label="部门编号" prop="form">
-                <el-select placeholder="选择编号" v-model="ruleForm.form">
-                  <el-option label="10" value="regular"></el-option>
-                  <el-option label="20" value="intern"></el-option>
-                  <el-option label="30" value="regular"></el-option>
-                  <el-option label="40" value="regular"></el-option>
+              <el-form-item label="部门编号" prop="deptno">
+                <el-select placeholder="选择编号" v-model="ruleForm.deptno">
+                  <el-option
+                    v-for="item in options"
+                   :key="item.value"
+                   :label="item.label"
+                   :value="item.deptno"
+                  >
+                  </el-option>            
                 </el-select>
-                </el-form-item>
-                <el-form-item label="岗位编号" prop="job">
+              </el-form-item>
+              <el-form-item label="岗位编号" prop="job">
                 <el-select placeholder="选择编号" v-model="ruleForm.job">
-                  <el-option label="11" value="regular"></el-option>
-                  <el-option label="22" value="intern"></el-option>
-                  <el-option label="33" value="regular"></el-option>
-                  <el-option label="44" value="regular"></el-option>
+                  <el-option
+                  v-for="item in option"
+                   :key="item.value"
+                   :label="item.label"
+                   :value="item.job"
+                  >
+                  </el-option>  
                 </el-select>
-                </el-form-item>
+              </el-form-item>
+
               <el-form-item label="入职时间" prop="entime">
                 <el-date-picker
                   v-model="ruleForm.entime"
                   align="right"
                   type="date"
                   placeholder="选择日期"
-                  :picker-options="pickerOptions"
-                ></el-date-picker>
+                  format="yyyy 年 MM 月 dd 日"
+                  value-format="yyyy-MM-dd"
+                >
+                </el-date-picker>
               </el-form-item>
-                 <el-form-item label="工作时间" prop="wtime">
+
+
+              <el-form-item label="工作时间" prop="wtime">
                 <el-date-picker
                   v-model="ruleForm.wtime"
                   align="right"
                   type="date"
                   placeholder="选择日期"
-                  :picker-options="pickerOptions"
-                ></el-date-picker>
-                 </el-form-item>     
+                  format="yyyy 年 MM 月 dd 日"
+                  value-format="yyyy-MM-dd"
+                >
+                </el-date-picker>
+              </el-form-item>   
+
+
+
+
                 <el-form-item label="职工类型" prop="form">
                 <el-select placeholder="用工形式" v-model="ruleForm.form">
                   <el-option label="正式员工" value="regular"></el-option>
@@ -80,7 +102,7 @@
                 <el-input v-model="ruleForm.email"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+                <el-button type="primary" @click="submitForm()">立即创建</el-button>
                 <el-button @click="cancel()">取消</el-button>
               </el-form-item>
             </div>
@@ -118,25 +140,56 @@ export default {
   data() {
     return {
       ruleForm: {
-        num:"",
-        empno:"",
-        ename:"",
-        birth:"",
-        idnum:"",
-        deptno:"",
-        job:"",
-        entime:"",
-        wtime:"",
-        form:"",
-        resource:"",
-        tel:"",
-        email:"",
+        empno: "",
+        ename: "",
+        birth: "",
+        idnum: "",
+        deptno: "0",
+        job: "0",
+        entime: "",
+        wtime: "",
+        form: "",
+        resource: "",
+        tel: "",
+        email: "",
       },
+      options: [
+        {
+          value: "选项1",
+          deptno: "10"
+        },
+        {
+          value: "选项2",
+          deptno: "20"
+        },
+        {
+          value: "选项3",
+          deptno: "30"
+        },
+                {
+          value: "选项4",
+          deptno: "40"
+        },
+      ],
+      option: [
+        {
+          value: "选项1",
+          job: "11"
+        },
+        {
+          value: "选项2",
+          job: "22"
+        },
+                {
+          value: "选项3",
+          job: "33"
+        },
+                {
+          value: "选项4",
+          job: "44"
+        },
+      ],
       rules: {
-         num: [
-          { required: true, message: "序号不能为空", trigger: 'blur' },
-          { min: 1, max: 2, message: "长度至少为10个字符", trigger: 'blur' }
-        ],
 
         empno: [
           { required: true, message: "工号不能为空", trigger: 'blur' },
@@ -181,36 +234,7 @@ export default {
            { required: true, message: "请选择人员来源", trigger: "change" }
          ],
       },
-      pickerOptions: {
-        disabledDate(time) {
-          return time.getTime() > Date.now();
-        },
-        shortcuts: [
-          {
-            text: "今天",
-            onClick(picker) {
-              picker.$emit("pick", new Date());
-            }
-          },
-         
-          {
-            text: "一周前",
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit("pick", date);
-            }
-          },
-                    {
-            text: "一年前",
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24 * 365);
-              picker.$emit("pick", date);
-            }
-          },
-        ]
-      }
+
     };
   },
   methods:{
