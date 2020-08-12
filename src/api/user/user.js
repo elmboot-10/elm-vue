@@ -13,3 +13,20 @@ export function users(params) {
     params: params, //注意：如果是get请求请使用 params: params
   });
 }
+
+export function userinfo(params) {
+  return request({
+    url: "/user/info",
+    method: "get",
+    params: params, //注意：如果是get请求请使用 params: params
+  });
+}
+
+
+export function deleteuser(params) {
+  return request({
+    url: "/user/delete",
+    method: "post",
+    data: params, 
+  });
+}

@@ -2,12 +2,12 @@
     <div>
         <el-form class="login-container"  label-width="10vw">
         <el-form-item  label="添加岗位id"  >
-        <el-input type="text" style="width:90%" v-model="mypostForm.jnum" placeholder="1~5位数字"></el-input>
+        <el-input type="text" style="width:90%" v-model="mypostForm.jnum" placeholder="1~2位数字"></el-input>
       </el-form-item>
       <el-form-item label="设置职位名" >
-        <el-input type="text" style="width:90%" v-model="mypostForm.jname" placeholder="3~8位字母或数字"></el-input>
+        <el-input type="text" style="width:90%" v-model="mypostForm.jname" placeholder="3~5位字母或数字"></el-input>
       </el-form-item>
-      <el-form-item label="设置职位类型"  style="width: 100%;">
+      <el-form-item label="设置职位类型"  >
         <el-select  v-model="mypostForm.jtype" placeholder="请选择职位类型">
           <el-option
             v-for="item in posttypes"
@@ -18,8 +18,10 @@
         </el-select>
       </el-form-item>
       <el-form-item  >
+        <div>
         <el-button type="success" round @click="addfinish">添加</el-button>
         <el-button type="primary" round @click="back">返回</el-button>
+        </div>
       </el-form-item>
       </el-form>
   </div>
@@ -61,12 +63,12 @@ export default {
               if (r == 1) {
                   console.log(this.mypostForm);
                 this.$message({
-                  message: "操作成功",
+                  message: "添加成功",
                   type: "success"
                 });
               }else {
                 this.$message({
-                  message: "操作失败",
+                  message: "添加失败",
                   type: "error"
                 });
               }
