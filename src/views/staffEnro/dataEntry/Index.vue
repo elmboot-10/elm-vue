@@ -15,19 +15,19 @@
                 <el-date-picker
                   v-model="ruleForm.birthday"
                   align="right"
+                  value-format="yyyy-MM-dd"
                   type="date"
                   placeholder="选择日期"
-                  :picker-options="pickerOptions"
                 ></el-date-picker>
               </el-form-item>
-              <el-form-item label="身份证号" prop="IDnum">
-                <el-input v-model="ruleForm.IDnum"></el-input>
+              <el-form-item label="身份证号" prop="idNum">
+                <el-input v-model="ruleForm.idNum"></el-input>
               </el-form-item>
               <el-form-item label="联系电话" prop="tel">
                 <el-input v-model="ruleForm.tel"></el-input>
               </el-form-item>
-              <el-form-item label="电子邮箱" prop="emil">
-                <el-input v-model="ruleForm.emil"></el-input>
+              <el-form-item label="电子邮箱" prop="email">
+                <el-input v-model="ruleForm.email"></el-input>
               </el-form-item>
               <el-form-item label="部门" prop="deptname">
                 <el-input v-model="ruleForm.deptname" @blur="checkdept"></el-input>
@@ -36,10 +36,20 @@
                 <el-input v-model="ruleForm.job" @blur="checkjob"></el-input>
               </el-form-item>
               <el-form-item label="入职日期" prop="entrydate">
-                <el-date-picker v-model="ruleForm.entrydate" type="date" placeholder="选择日期"></el-date-picker>
+                <el-date-picker
+                  v-model="ruleForm.entrydate"
+                  type="date"
+                  value-format="yyyy-MM-dd"
+                  placeholder="选择日期"
+                ></el-date-picker>
               </el-form-item>
               <el-form-item label="工作日期" prop="workdate">
-                <el-date-picker v-model="ruleForm.workdate" type="date" placeholder="选择日期"></el-date-picker>
+                <el-date-picker
+                  v-model="ruleForm.workdate"
+                  type="date"
+                  value-format="yyyy-MM-dd"
+                  placeholder="选择日期"
+                ></el-date-picker>
               </el-form-item>
               <el-form-item label="用工形式" prop="empform">
                 <el-select placeholder="用工形式" v-model="ruleForm.empform">
@@ -65,7 +75,7 @@
                 ></el-date-picker>
               </el-form-item>-->
               <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+                <el-button type="primary" @click="submitForm()">立即创建</el-button>
                 <el-button>取消</el-button>
               </el-form-item>
             </div>
@@ -99,19 +109,19 @@
 }
 </style>
 <script>
+import { dataEntry } from "@/api/staffEnro/staffEnro";
 export default {
   data() {
     return {
       ruleForm: {
-        name: "",
-        empno: "",
+        empno: "2222",
         empname: "",
         birthday: "",
-        IDnum: "",
-        tel: "",
-        emil: "",
-        deptname: "",
-        job: "",
+        idNum: "111111111111111111",
+        tel: "11111111111",
+        email: "222222",
+        deptname: "卫生部",
+        job: "技术员",
         entrydate: "",
         workdate: "",
         empform: "",
@@ -124,16 +134,15 @@ export default {
           { min: 1, max: 12, message: "长度在 1 到 12 个字符", trigger: "blur" }
         ],
         empname: [{ required: true, message: "姓名不能为空", trigger: "blur" }],
-
         birthday: [
           {
-            type: "date",
+            // type: "date",
             required: true,
             message: "请选择日期",
             trigger: "change"
           }
         ],
-        IDnum: [
+        idNum: [
           { required: true, message: "身份证号不能为空", trigger: "blur" },
           {
             min: 18,
@@ -146,7 +155,7 @@ export default {
           { required: true, message: "手机号不能为空", trigger: "blur" },
           { min: 11, max: 11, message: "请检查手机号是否正确", trigger: "blur" }
         ],
-        emil: [
+        email: [
           { required: true, message: "邮箱地址不能为空", trigger: "blur" }
         ],
         deptname: [
@@ -155,7 +164,7 @@ export default {
         job: [{ required: true, message: "职位不能为空", trigger: "blur" }],
         entrydate: [
           {
-            type: "date",
+            // type: "date",
             required: true,
             message: "请选择入职日期",
             trigger: "change"
@@ -163,7 +172,7 @@ export default {
         ],
         workdate: [
           {
-            type: "date",
+            // type: "date",
             required: true,
             message: "请选择工作日期",
             trigger: "change"
@@ -216,7 +225,32 @@ export default {
     };
   },
   methods: {
+    // formatDate(row) {
+    //   //时间戳转换
+    //   let date = new Date(parseInt(row.subscribeTime) * 1000);
+    //   let Y = date.getFullYear() + "-";
+    //   let M =
+    //     date.getMonth() + 1 < 10
+    //       ? "0" + (date.getMonth() + 1) + "-"
+    //       : date.getMonth() + 1 + "-";
+    //   let D =
+    //     date.getDate() < 10 ? "0" + date.getDate() + " " : date.getDate() + " ";
+    //   let h =
+    //     date.getHours() < 10
+    //       ? "0" + date.getHours() + ":"
+    //       : date.getHours() + ":";
+    //   let m =
+    //     date.getMinutes() < 10
+    //       ? "0" + date.getMinutes() + ":"
+    //       : date.getMinutes() + ":";
+    //   let s =
+    //     date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+    //   return Y + M + D + h + m + s;
+    // },
     checkUserId() {
+      if(this.ruleForm.empno=="null"){
+        return
+      }
       this.$axios
         .post(
           "user/isexistuser",
@@ -225,7 +259,7 @@ export default {
           })
         )
         .then(res => {
-          if (res.data == 1) {
+          if (res.data >= 1) {
             // alert("员工号已存在！");
             this.$message.error("员工号已存在!");
           }
@@ -235,6 +269,9 @@ export default {
         });
     },
     checkdept() {
+      if(this.ruleForm.deptname==""){
+        return
+      }
       this.$axios
         .post(
           "dept_manage/isexistdept",
@@ -252,6 +289,9 @@ export default {
         });
     },
     checkjob() {
+      if(this.ruleForm.job==""){
+        return
+      }
       this.$axios
         .post(
           "posi/isexistjob",
@@ -268,24 +308,24 @@ export default {
           console.error(error);
         });
     },
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+    submitForm() {
+      this.$refs.ruleForm.validate(valid => {
         if (!valid) {
           // alert('submit!');
           console.log("error submit!!");
           return false;
         }
-        this.$axios
-          .post("user/insert", this.$qs.stringify(formName))
-          .then(res=>{
-            if(res.data==1){
-              this.message.success('员工信息已录入')
+        console.log(this.ruleForm);
+        dataEntry(this.ruleForm)
+          .then(res => {
+            if (res.data == 1) {
+              this.$message.success("员工信息已录入");
             } else {
-              this.message.error('因某些原因员工信息录入失败！')
+              this.$message.error("因某些原因员工信息录入失败！");
             }
           })
           .catch(error => {
-          console.error(error);
+            console.error(error);
           });
       });
     }
