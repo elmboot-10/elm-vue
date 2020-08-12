@@ -43,11 +43,12 @@ router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title
     ? to.meta.title + "-" + Config.siteName
     : Config.siteName;
-  if (!getToken() && to.path !== "/login") {
+  if (!getToken() &&  to.path !== "/login" ) {                                //除了登录、注册、首页之外，都需要判断是否登录了
     next({ path: "/login" });
   } else {
     next();
   }
+
 });
 
 new Vue({
