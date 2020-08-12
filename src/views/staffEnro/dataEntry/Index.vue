@@ -5,8 +5,8 @@
         <div class="demo-block">
           <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="aaa" label-width="80px">
             <div class="inLine">
-              <el-form-item label="员工号" prop="empno">
-                <el-input v-model="ruleForm.empno" @blur="checkUserId"></el-input>
+              <el-form-item label="员工号" prop="empno" required>
+                <el-input v-model="ruleForm.empno"></el-input>
               </el-form-item>
               <el-form-item label="姓名" prop="empname">
                 <el-input v-model="ruleForm.empname"></el-input>
@@ -29,11 +29,11 @@
               <el-form-item label="电子邮箱" prop="email">
                 <el-input v-model="ruleForm.email"></el-input>
               </el-form-item>
-              <el-form-item label="部门" prop="deptname">
-                <el-input v-model="ruleForm.deptname" @blur="checkdept"></el-input>
+              <el-form-item label="部门" prop="deptname" required>
+                <el-input v-model="ruleForm.deptname"></el-input>
               </el-form-item>
-              <el-form-item label="职位" prop="job">
-                <el-input v-model="ruleForm.job" @blur="checkjob"></el-input>
+              <el-form-item label="职位" prop="job" required>
+                <el-input v-model="ruleForm.job"></el-input>
               </el-form-item>
               <el-form-item label="入职日期" prop="entrydate">
                 <el-date-picker
@@ -76,7 +76,7 @@
               </el-form-item>-->
               <el-form-item>
                 <el-button type="primary" @click="submitForm()">立即创建</el-button>
-                <el-button>取消</el-button>
+                <el-button @click="resetForm()">取消</el-button>
               </el-form-item>
             </div>
           </el-form>
@@ -112,16 +112,83 @@
 import { dataEntry } from "@/api/staffEnro/staffEnro";
 export default {
   data() {
+    //员工号输入规则
+    var checkEmpno = (rule, value, callback) => {
+      if (value === "") {
+        return callback(new Error("员工号不能为空"));
+      } else {
+        this.$axios
+          .post(
+            "staff/isExistStaff",
+            this.$qs.stringify({
+              empno: this.ruleForm.empno
+            })
+          )
+          .then(res => {
+            if (res.data >= 1) {
+              return callback(new Error("员工号已存在"));
+            } else return callback();
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+    };
+    //部门输入规则
+    var checkDept = (rule, value, callback) => {
+      if (value === "") {
+        return callback(new Error("部门不能为空"));
+      } else {
+        this.$axios
+          .post(
+            "staff/isExistDept",
+            this.$qs.stringify({
+              deptname: this.ruleForm.deptname
+            })
+          )
+          .then(res => {
+            if (res.data == 0) {
+              return callback(new Error("部门不存在!"));
+            } else return callback();
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+    };
+    //职位输入规则
+    var checkJob = (rule, value, callback) => {
+      if (value === "") {
+        return callback(new Error("职位不能为空"));
+      } else {
+        this.$axios
+          .post(
+            "staff/isExistJob",
+            this.$qs.stringify({
+              job: this.ruleForm.job
+            })
+          )
+          .then(res => {
+            if (res.data == 0) {
+              return callback(new Error("职位不存在!"));
+            } else return callback();
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+    };
+    //-------------------
     return {
       ruleForm: {
-        empno: "2222",
+        empno: "",
         empname: "",
         birthday: "",
         idNum: "111111111111111111",
         tel: "11111111111",
-        email: "222222",
-        deptname: "卫生部",
-        job: "技术员",
+        email: "",
+        deptname: "",
+        job: "",
         entrydate: "",
         workdate: "",
         empform: "",
@@ -130,7 +197,7 @@ export default {
       },
       rules: {
         empno: [
-          { required: true, message: "员工号不能为空", trigger: "blur" },
+          { validator: checkEmpno, trigger: "blur" },
           { min: 1, max: 12, message: "长度在 1 到 12 个字符", trigger: "blur" }
         ],
         empname: [{ required: true, message: "姓名不能为空", trigger: "blur" }],
@@ -158,10 +225,8 @@ export default {
         email: [
           { required: true, message: "邮箱地址不能为空", trigger: "blur" }
         ],
-        deptname: [
-          { required: true, message: "部门不能为空", trigger: "blur" }
-        ],
-        job: [{ required: true, message: "职位不能为空", trigger: "blur" }],
+        deptname: [{ validator: checkDept, trigger: "blur" }],
+        job: [{ validator: checkJob, trigger: "blur" }],
         entrydate: [
           {
             // type: "date",
@@ -225,89 +290,6 @@ export default {
     };
   },
   methods: {
-    // formatDate(row) {
-    //   //时间戳转换
-    //   let date = new Date(parseInt(row.subscribeTime) * 1000);
-    //   let Y = date.getFullYear() + "-";
-    //   let M =
-    //     date.getMonth() + 1 < 10
-    //       ? "0" + (date.getMonth() + 1) + "-"
-    //       : date.getMonth() + 1 + "-";
-    //   let D =
-    //     date.getDate() < 10 ? "0" + date.getDate() + " " : date.getDate() + " ";
-    //   let h =
-    //     date.getHours() < 10
-    //       ? "0" + date.getHours() + ":"
-    //       : date.getHours() + ":";
-    //   let m =
-    //     date.getMinutes() < 10
-    //       ? "0" + date.getMinutes() + ":"
-    //       : date.getMinutes() + ":";
-    //   let s =
-    //     date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-    //   return Y + M + D + h + m + s;
-    // },
-    checkUserId() {
-      if(this.ruleForm.empno=="null"){
-        return
-      }
-      this.$axios
-        .post(
-          "staff/isExistStaff",
-          this.$qs.stringify({
-            empno: this.ruleForm.empno
-          })
-        )
-        .then(res => {
-          if (res.data >= 1) {
-            // alert("员工号已存在！");
-            this.$message.error("员工号已存在!");
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
-    checkdept() {
-      if(this.ruleForm.deptname==""){
-        return
-      }
-      this.$axios
-        .post(
-          "dept_manage/isexistdept",
-          this.$qs.stringify({
-            dname: this.ruleForm.deptname
-          })
-        )
-        .then(res => {
-          if (res.data == 0) {
-            this.$message.error("部门不存在!");
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
-    checkjob() {
-      if(this.ruleForm.job==""){
-        return
-      }
-      this.$axios
-        .post(
-          "posi/isexistjob",
-          this.$qs.stringify({
-            jname: this.ruleForm.job
-          })
-        )
-        .then(res => {
-          if (res.data == 0) {
-            this.$message.error("职位不存在!");
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
     submitForm() {
       this.$refs.ruleForm.validate(valid => {
         if (!valid) {
@@ -320,6 +302,7 @@ export default {
           .then(res => {
             if (res == 1) {
               this.$message.success("员工信息已录入");
+              this.resetForm();
             } else {
               this.$message.error("因某些原因员工信息录入失败！");
             }
@@ -328,6 +311,9 @@ export default {
             console.error(error);
           });
       });
+    },
+    resetForm() {
+      this.$refs.ruleForm.resetFields();
     }
   }
 };
