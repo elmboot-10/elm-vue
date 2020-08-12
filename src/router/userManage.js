@@ -17,5 +17,21 @@ export default {
       component: (resolve) =>
         require(["@/views/userManage/userList/Index.vue"], resolve),
     },
+
+    {
+      path: "info",
+      name: "UserManageList",
+      meta: {
+        title: "信息处理",
+      },
+      component: (resolve) =>
+        require(["@/views/userinfo/Index.vue"], resolve),
+    },
+
+
+
+
+
   ],
+  
 };
