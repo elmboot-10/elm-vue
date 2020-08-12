@@ -11,7 +11,7 @@
         <el-table-column prop="email" label="邮箱" align="center"></el-table-column>
         <el-table-column prop="idNum" label="证件号" align="center"></el-table-column>
       </el-table>
-      <div class="aaa">
+      <div class="aaaa">
         <el-pagination
           small
           :page-size="pageSize"
@@ -44,7 +44,7 @@
 .box-card {
   width: 700px;
 }
-.aaa {
+.aaaa {
   width: 100%;
   text-align: center;
 }
