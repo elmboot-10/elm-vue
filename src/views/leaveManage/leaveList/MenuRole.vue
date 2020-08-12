@@ -21,7 +21,6 @@
     </el-table> 
   </div>
 </template>
-
 <script>
 import { leave } from "@/api/leave/leave";
 import MenuRole from './MenuRole'
