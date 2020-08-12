@@ -42,7 +42,7 @@
                   </el-option>            
                 </el-select>
               </el-form-item>
-              <!-- <el-form-item label="岗位编号" prop="job">
+              <el-form-item label="岗位编号" prop="job">
                 <el-select placeholder="选择编号" v-model="ruleForm.job">
                   <el-option
                   v-for="item in option"
@@ -52,7 +52,7 @@
                   >
                   </el-option>  
                 </el-select>
-              </el-form-item> -->
+              </el-form-item>
 
               <el-form-item label="入职时间" prop="entime">
                 <el-date-picker
