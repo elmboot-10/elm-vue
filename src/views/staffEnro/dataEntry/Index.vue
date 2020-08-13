@@ -125,7 +125,7 @@
 }
 </style>
 <script>
-import { dataEntry } from "@/api/staffEnro/staffEnro";
+// import { dataEntry } from "@/api/staffEnro/staffEnro";
 export default {
   data() {
     //员工号输入规则
@@ -318,7 +318,7 @@ export default {
         //qs传递数据，后端不需要RequestBody
           .post("staff/dataEntry", this.$qs.stringify(this.ruleForm))
           .then(res => {
-            if (res == 1) {
+            if (res.data == 1) {
               this.$message.success("员工信息已录入");
               this.resetForm();
             } else {
