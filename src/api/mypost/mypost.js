@@ -77,4 +77,24 @@ export function deletePosi(params) {
     data: params, //注意：如果是get请求请使用 params: params
   });
 }
-
+/**
+ * 获取员工信息
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function getUserById(params) {
+  return request({
+    url: "/user/getUserById",
+    method: "post",
+    data: params, //注意：如果是get请求请使用 params: params
+  });
+}
+export function userlist(params) {
+  return request({
+    // closeLoading: true,
+    // closeInterceptors: true,
+    url: "/user/list",
+    method: "post",
+    data: params, //注意：如果是get请求请使用 params: params
+  });
+}
