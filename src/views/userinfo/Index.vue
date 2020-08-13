@@ -134,32 +134,40 @@
        
                 </el-tab-pane>
                 <el-tab-pane label="活动通知" name="third">
-                    <el-collapse v-model="activeNames" @change="handleChange">
-                      <el-collapse-item title="东软集团Matrix分部员工运动大会" name="1">
-                        <div>发布时间：     2020-08-13</div>                       
-                        <div>发布内容：</div>
-                        <div>     2020-08-14 -- 2020-08-20</div>
-                        <div>     在新世界运动中心举办第十三届东软集团Matrix分部员工运动大会，请所有员工参加，不上班，工资照拿！</div>
-                      </el-collapse-item>
-                      <el-collapse-item title="东软集团Matrix分部员工表彰大会" name="2">
-                        <div>发布时间：     2020-08-13</div>
-                        <div>发布内容：</div>
-                        <div>     2020-08-21</div>
-                        <div>     在春熙路小龙坎火锅店里举行员工表彰大会，拿钱！</div>
-                      </el-collapse-item>
-                      <el-collapse-item title="东软集团Matrix分部年度总结大会" name="3">
-                        <div>发布时间：     2020-08-13</div>
-                        <div>发布内容：</div>
-                        <div>     2020-08-22</div>
-                        <div>     在春熙路大龙燚火锅店里举行员工年度大会，快来拿钱！</div>
-                      </el-collapse-item>
-                      <el-collapse-item title="东软集团Matrix分部聚餐happy" name="4">
-                        <div>发布时间：     2020-08-13</div>
-                        <div>发布内容：</div>
-                        <div>     2020-08-23</div>
-                        <div>     成都Space酒吧Matrix专属卡座，嗨起来！谁先跑谁买单！</div>
-                      </el-collapse-item>
-                    </el-collapse>    
+                   
+
+                <el-collapse v-model="activeName" accordion>
+  <el-collapse-item title="东软集团Matrix分部员工运动大会" name="1">
+    <div>发布时间：     2020-08-13</div>                       
+    <div>发布内容：</div>
+    <div>     2020-08-14 -- 2020-08-20</div>
+    <div>     在新世界运动中心举办第十三届东软集团Matrix分部员工运动大会，请所有员工参加，不上班，工资照拿！</div>
+  </el-collapse-item>
+  <el-collapse-item title="东软集团Matrix分部员工表彰大会" name="2">
+    <div>发布时间：     2020-08-13</div>
+    <div>发布内容：</div>
+    <div>     2020-08-21</div>
+    <div>     在春熙路小龙坎火锅店里举行员工表彰大会，拿钱！</div>
+  </el-collapse-item>
+  <el-collapse-item title="东软集团Matrix分部年度总结大会" name="3">
+    <div>发布时间：     2020-08-13</div>
+    <div>发布内容：</div>
+    <div>     2020-08-22</div>
+    <div>     在春熙路大龙燚火锅店里举行员工年度大会，快来拿钱！</div>
+  </el-collapse-item>
+  <el-collapse-item title="东软集团Matrix分部聚餐happy" name="4">
+      <div>发布时间：     2020-08-13</div>
+      <div>发布内容：</div>
+      <div>     2020-08-23</div>
+      <div>     成都Space酒吧Matrix专属卡座，嗨起来！谁先跑谁买单！</div>
+  </el-collapse-item>
+</el-collapse>
+
+
+
+
+
+
                 </el-tab-pane>
 
 
@@ -215,7 +223,7 @@ import { users} from "@/api/user/user";
 export default {
   data() {
     return {
-      activeNames: ['1'],
+      activeNames: '1',
       tabPosition: 'left',
  
 
@@ -348,9 +356,6 @@ tableData3: [{
       });
   },
   methods: {
-    handleChange(val) {
-        console.log(val);
-      },
        handleClick(tab, event) {
         console.log(tab, event);
       },
