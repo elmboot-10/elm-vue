@@ -57,22 +57,22 @@ export default {
       pageNo: 1,
       pageSize: 10,
       total: 0,
-      talentpool: [],
+      talentpool: []
     };
   },
   created() {
     this.initdata();
   },
   methods: {
-    changePage(val){
-      this.pageNo=val;
-      this.initdata();  
+    changePage(val) {
+      this.pageNo = val;
+      this.initdata();
     },
     initdata() {
-      talentlistpage({pageNo:this.pageNo,pageSize:this.pageSize})
+      talentlistpage({ pageNo: this.pageNo, pageSize: this.pageSize })
         .then(r => {
           this.talentpool = r.talentList;
-          this.total=r.counts;
+          this.total = r.counts;
         })
         .catch(e => {
           console.log(e);
