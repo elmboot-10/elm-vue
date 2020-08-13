@@ -47,7 +47,7 @@ export function insert(params) {
  */
 export function getPosiById(params) {
   return request({
-    url: "/posi/getFoodById",
+    url: "/posi/getposiById",
     method: "post",
     data: params, //注意：如果是get请求请使用 params: params
   });

@@ -23,18 +23,19 @@
       <el-table-column fixed="right" label="操作" width="100">
         <div slot-scope="s">
           <el-button type="primary" size="small" @click="routeDemo(s.row)">编辑</el-button>
-          <el-button type="danger" size="small" @click="removeItem(s.row)">删除</el-button>
+          <el-button type="danger" size="small" @click="removeItem(s.row.empno)">删除</el-button>
         </div>
       
       </el-table-column>
    
     </el-table>
     <el-button type="primary" @click="add()">新增用户</el-button>
+
   </div>
 </template>
 
 <script>
-import { users } from "@/api/user/user";
+import { users , deleteuser } from "@/api/user/user";
 export default {
   data() {
     return {
@@ -54,28 +55,37 @@ export default {
     routeDemo() {
       this.$message.info("待添加");
     },
-    removeItem(row) {
+    removeItem(empno) {
       this.$confirm("确定删除?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       })
         .then(() => {
-          row.d = 0;
-          // updateStatus({ id: row.id})
-          //   .then(r => {
-          //     this.$message({
-          //       type: "success",
-          //       message: "操作成功!"
-          //     });
-          //     this.refresh();
-          //   })
-          //   .catch(() => {});
+          deleteuser({empno})
+           .then(r=>{
+             if(r==1){
+               this.$message({
+                 type:"success",
+                 message:"操作成功"
+               });
+               this.refresh();
+             }else{
+               this.$message({
+                 type:"error",
+                 message:"操作失败！"
+               });
+             }
+           })
+             .catch(()=>{})
         })
         .catch(() => {});
     },
     add(){
             this.$router.push({ path: "/add" ,name:"Add" });
+          },
+          refresh(){
+            this.initData();
           }
   }
 };

@@ -9,9 +9,9 @@ export default {
       path: "/user_manage/list",
     },
     organCardList: {
-      name: "用户分类",
+      name: "信息处理",
       permissionsKey: "",
-      path: "/user_manage/category",
+      path: "/user_manage/info",
     },
   },
 };
