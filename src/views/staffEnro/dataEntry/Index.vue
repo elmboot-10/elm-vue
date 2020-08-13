@@ -108,6 +108,7 @@
 .demo-blo {
   padding: 20px 50px 20px 35px;
 }
+/* hover选择器 */
 .bbb:hover .demo-blo {
   background: #ffffff;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.5);
@@ -317,6 +318,7 @@ export default {
         }
         console.log(this.ruleForm);
         this.$axios
+        //qs传递数据，后端不需要RequestBody
           .post("staff/dataEntry", this.$qs.stringify(this.ruleForm))
           .then(res => {
             if (res.data > 0) {
