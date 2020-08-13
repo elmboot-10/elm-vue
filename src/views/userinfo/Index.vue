@@ -4,12 +4,11 @@
 
     <el-tab-pane>
       <span slot="label"><i class="el-icon-s-custom"></i> 请假申请</span>
-                <el-table
+                <!-- <el-table
                   :data="tableData"
                   style="width: 100%"
                 >
                   <el-table-column
-                    fixed
                     prop="date"
                     label="日期"
                     width="250">
@@ -42,8 +41,45 @@
                       </el-button>
                     </template>
                   </el-table-column>
-                </el-table>
-    </el-tab-pane>
+                </el-table> -->
+                          <template>
+                            <el-table
+                              :data="tableData3"
+                              border
+                              style="width: 100%">
+                              <el-table-column
+                                prop="date"
+                                label="日期"
+                                width="180">
+                              </el-table-column>
+                              <el-table-column
+                                prop="name"
+                                label="姓名"
+                                width="180">
+                              </el-table-column>
+                              <el-table-column
+                                prop="cause"
+                                label="事由">
+                              </el-table-column>
+                                 <el-table-column
+                                prop="time"
+                                label="请假时长">
+                              </el-table-column>
+                            </el-table>
+                          </template>
+
+
+                        <div>
+                          <el-popconfirm
+                            title="确定批准申请吗"
+                          >
+                            <el-button slot="reference" style="color:red">批准以上申请</el-button>
+                          </el-popconfirm>
+                         </div>
+
+
+
+                    </el-tab-pane>
 
 
 
@@ -53,7 +89,7 @@
     <el-tab-pane>
        <span slot="label"><i class="el-icon-chat-line-round"></i> 用户通知</span>
           <template>
-              <el-tabs v-model="activeName" @tab-click="handleClick">
+              <el-tabs v-model="activeNames" @tab-click="handleClick">
                 <el-tab-pane label="今日菜谱" class="el-icon-food" name="first" >
                           <template>
                             <el-table
@@ -93,13 +129,7 @@
                         通知2
                         </el-button>
                       </template>   
-                         <div style="position:relative;left:950px;top:500px;">
-                          <el-popconfirm
-                            title="确定发送以上通知吗"
-                          >
-                            <el-button slot="reference" style="color:blue">发送通知</el-button>
-                          </el-popconfirm>
-                         </div>
+
                         
        
                 </el-tab-pane>
@@ -187,49 +217,46 @@ export default {
     return {
       activeNames: ['1'],
       tabPosition: 'left',
-      tableData: [{
-            date: '2020-08-14',
+ 
+
+
+tableData3: [{
+            date: '2020-08-13',
             name: '冉海锋',
             cause: '回家结婚',
             time: '2020-08-14~2020-09-01',
           }, {
-            date: '2020-08-14',
+            date: '2020-08-13',
             name: '尼一卓',
             cause: '提车',
-            time: '2020-08-14~2020-08-19',
+            time: '2020-08-14~2020-09-01',
           }, {
-            date: '2020-08-14',
+            date: '2020-08-13',
             name: '杨恩舟',
             cause: '常回家看看',
             time: '2020-08-14~2020-09-01',
           }, {
-            date: '2020-08-14',
+            date: '2020-08-13',
             name: '杨博汇',
             cause: '看NBA总决赛',
-            time: '2020-08-14',
+            time: '2020-08-14~2020-09-01',
           }, {
-            date: '2020-08-14',
+            date: '2020-08-13',
             name: '马钰琦',
             cause: '旅游',
             time: '2020-08-14~2020-09-01',
-          }, 
-          {
-            date: '2020-08-14',
+          }, {
+            date: '2020-08-13',
             name: '代恩',
             cause: '住院',
             time: '2020-08-14~2020-09-01',
-          },      
-          {
-            date: '2020-08-14',
+          }, {
+            date: '2020-08-13',
             name: '肖战',
             cause: '粉丝见面会',
             time: '2020-08-14~2020-09-01',
-          }, {
-            date: '2020-08-14',
-            name: '邓紫棋',
-            cause: '慈善汇演',
-            time: '2020-08-14~2020-09-01',
           }],
+
 
 
           tableData1: [{
@@ -323,6 +350,9 @@ export default {
   methods: {
     handleChange(val) {
         console.log(val);
+      },
+       handleClick(tab, event) {
+        console.log(tab, event);
       },
     deleteRow(index, rows) {
         rows.splice(index, 1);
