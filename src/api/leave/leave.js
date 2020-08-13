@@ -29,14 +29,14 @@ export function look(params) {
  * 添加离职人员
  * @param params
  * @returns {AxiosPromise}
- */
+
 export function insert(params) {
   return request({
     url: "/leave_mag/insert",
     method: "post",
     data: params, //注意：如果是get请求请使用 params: params
   });
-}
+} */
 /**
  * 根据id查询离职人员
  * @param params

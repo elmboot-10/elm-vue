@@ -6,6 +6,7 @@ import UserManage from "./userManage";
 import StaffEnro from "./staffEnro";
 import PostManage from "./mypost";
 import LeaveManage from "./leaveManage";
+import Leave from "./leave"
 Vue.use(VueRouter);
 
 const routes = [
@@ -33,6 +34,7 @@ const routes = [
   StaffEnro,
   PostManage,
   LeaveManage,
+  Leave,
   {
     path: "/login",
     name: "Login",
@@ -73,6 +75,16 @@ const routes = [
     },
     components: {
      blank: (resolve) => require(["@/views/mypostManage/mypostList/addpost.vue"], resolve),
+    },
+  },
+  {
+    path: "/leave",
+    name: "Leave",
+    meta: {
+      title: "员工离职",
+    },
+    components: {
+     blank: (resolve) => require(["@/views/leave/leave.vue"], resolve),
     },
   },
 ];

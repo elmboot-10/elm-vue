@@ -78,9 +78,11 @@ export default {
           let user = res.data;
           if (user>0) {
             this.$message.success("注册成功，跳转到登录界面！");
-            return ;
+            this.$router.push({ path: "/login" });
+            
           } else {
             this.$message.error("注册失败！");
+            return;
           }
         })
         .catch(e => {
