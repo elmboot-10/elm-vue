@@ -1,9 +1,12 @@
 <template>
   <div>
     <div style="display:flex;">
-        <div style="flex:2">
-          <div  class="fa fa-search-plus" aria-hidden="true" type="success" size="small">&nbsp;查询部门</div>&nbsp;
-          <el-input @blur="select()" placeholder="请输入部门编号" style="width: 40%"></el-input>
+        <div style="flex:3">
+          
+          <el-input  v-model="tableData.dname" placeholder="请输入部门名称" style="width: 40%">
+          </el-input>&nbsp;<div class="fa fa-search-plus">
+            </div> &nbsp;<el-button  @blur="refresh()">&nbsp;确定</el-button>
+          
         </div>
         <div>
           <el-button   class="fa fa-plus-square" aria-hidden="true" type="success" size="small" @click="newItem()">&nbsp;新建部门</el-button> 
@@ -18,8 +21,8 @@
       <el-table-column prop="setuptime" label="成立时间"></el-table-column>
       <el-table-column fixed="right" label="操作" width="240">
         <div slot-scope="s">
-          <el-button type="primary" size="small" @click="routeDemo(s.row)">编辑</el-button>
-          <el-button type="danger" size="small" @click="removeItem(s.row)">删除</el-button>
+          <el-button type="primary" size="small" @click="routeDemo(s.row.deptno)">编辑</el-button>
+          <el-button type="danger" size="small" @click="removeItem(s.row.deptno)">删除</el-button>
         </div>
       </el-table-column>
     </el-table> 
@@ -27,7 +30,7 @@
 </template>
 
 <script>
-import { depts } from "@/api/deptManage/dept";
+import { depts ,deleteDept} from "@/api/deptManage/dept";
 export default {
   data() {
     return {
@@ -39,6 +42,10 @@ export default {
     };
   },
   created() {
+    this.initDate()
+  },
+  methods: {
+    initDate(){
     depts()
       .then(r => {
         this.tableData = r;
@@ -46,39 +53,44 @@ export default {
       .catch(e => {
         console.log(e);
       });
-  },
-  methods: {
+      depts({
+
+      })
+    },
     newItem() {
       this.$router.push({ path: "/dept_manage/newdept"});
-    },
-    select(){
-       if (this.tableData.dname == ""||this.tableData.dname == null) {
-        this.$message.error("部门名不能为空!");
-        return;
-      }
     },
     routeDemo(){
       this.$message.info("待编辑！");
     },
-    removeItem(row) {
+    removeItem(deptno) {
       this.$confirm("确定删除?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       })
         .then(() => {
-          row.d = 0;
-          // updateStatus({ id: row.id})
-          //   .then(r => {
-          //     this.$message({
-          //       type: "success",
-          //       message: "操作成功!"
-          //     });
-          //     this.refresh();
-          //   })
-          //   .catch(() => {});
+        deleteDept({ deptno })
+            .then(r => {
+              if (r == 1) {
+                this.$message({
+                  type: "success",
+                  message: "操作成功!"
+                });
+                this.refresh();
+              } else {
+                this.$message({
+                  type: "error",
+                  message: "操作失败!"
+                });
+              }
+            })
+            .catch(() => {});
         })
         .catch(() => {});
+    },
+    refresh(){
+      this.initDate();
     }
   }
 };
