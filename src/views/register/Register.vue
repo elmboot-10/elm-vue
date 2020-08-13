@@ -28,7 +28,7 @@
           </el-form-item>
         
           <el-form-item>
-            <el-button type="primary" style="width: 100%;background: #505458;border: none" @click="tologin">登录</el-button>
+            <el-button type="primary" style="width: 100%;background: #505458;border: none" @click="tologin">返回</el-button>
           </el-form-item>
         
       </el-form>
@@ -78,6 +78,7 @@ export default {
           let user = res.data;
           if (user>0) {
             this.$message.success("注册成功，跳转到登录界面！");
+            this.$router.push({ path: "/login" });
             return ;
           } else {
             this.$message.error("注册失败！");
