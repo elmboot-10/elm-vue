@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>人才库</span>
-        <el-button style="float: right; padding: 3px 0" type="text">刷新</el-button>
+        <el-button style="float: right; padding: 3px 0" type="text" @click="initdata">刷新</el-button>
       </div>
       <el-table :data="talentpool" style="width: 100%">
         <el-table-column prop="tname" label="姓名" width="100" align="center"></el-table-column>
