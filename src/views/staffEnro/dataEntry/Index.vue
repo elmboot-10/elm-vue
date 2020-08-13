@@ -150,6 +150,7 @@ export default {
           });
       }
     };
+    
     //部门输入规则
     var checkDept = (rule, value, callback) => {
       if (value === "") {
