@@ -51,7 +51,7 @@
                     <el-option label="试用期未通过" value="nottongguo"></el-option>
                 </el-select>
                 </el-form-item> 
-      <el-form-item label="离职原因" prop="leaveReason">
+      <el-form-item label="离职详细原因" prop="leaveReason">
                 <el-input v-model="editForm.leaveReason"></el-input>
       </el-form-item>
     </div>

@@ -135,7 +135,7 @@ export default {
              this.$router.push({ path: "/leave_manage/list" });
            }
            else{
-             this.$message.error("离职失败")
+             this.$message.error("离职失败！")
            }
          })
          .catch(e => {

@@ -36,7 +36,7 @@ export function insert(params) {
     method: "post",
     data: params, //注意：如果是get请求请使用 params: params
   });
-} */
+} */   
 /**
  * 根据id查询离职人员
  * @param params
