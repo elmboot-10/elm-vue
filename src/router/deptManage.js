@@ -16,6 +16,14 @@ export default {
       },
       component: resolve =>
         require(["@/views/deptManage/deptList/Index.vue"], resolve)
+    },
+    {
+      path: "newdept",
+      name: "NewDept",
+      meta: {
+        title: "新建部门"
+      },
+      component: resolve => require(["@/views/deptManage/newDept/Index.vue"], resolve)
     }
   ]
 };

@@ -14,3 +14,17 @@ export function depts(params) {
     params: params, //注意：如果是get请求请使用 params: params
   });
 }
+  /**
+ * 新建部门
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function newdepts(params) {
+  return request({
+    // closeLoading: true,
+    // closeInterceptors: true,
+    url: "/dept_manage/newdept",
+    method: "get",
+    params: params, //注意：如果是get请求请使用 params: params
+  });
+}

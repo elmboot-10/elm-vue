@@ -5,6 +5,8 @@
         <div class="demo-block">
           <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="aaa" label-width="80px">
             <div class="inLine">
+              <h3 class="line">员工信息</h3>
+         <el-divider><i class="el-icon-mobile-phone"></i></el-divider>
               <el-form-item label="工号" prop="empno">
                 <el-input v-model="ruleForm.empno" @blur="checkempno"></el-input>
               </el-form-item>
@@ -126,7 +128,7 @@
 </template> 
 <style>
 .demo-block {
-  width: 700px;
+  width: 600px;
   box-sizing: border-box;
   padding: 20px 50px 20px 35px;
   border: 1px solid #444;
