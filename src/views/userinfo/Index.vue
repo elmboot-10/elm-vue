@@ -2,44 +2,7 @@
   <el-tabs :tab-position="tabPosition" style="height: 500px;">
     <el-tab-pane>
       <span slot="label"><i class="el-icon-s-custom"></i> 请假申请</span>
-                <!-- <el-table
-                  :data="tableData"
-                  style="width: 100%"
-                >
-                  <el-table-column
-                    prop="date"
-                    label="日期"
-                    width="250">
-                  </el-table-column>
-                  <el-table-column
-                    prop="name"
-                    label="姓名"
-                    width="250">
-                  </el-table-column>
-                  <el-table-column
-                    prop="cause"
-                    label="事由"
-                    width="250">
-                  </el-table-column>
-                  <el-table-column
-                    prop="time"
-                    label="请假时间"
-                    width="250">
-                  </el-table-column>
-                  <el-table-column
-                    fixed="right"
-                    label="操作"
-                    width="120">
-                    <template slot-scope="scope">
-                      <el-button
-                        @click.native.prevent="deleteRow(scope.$index, tableData)"
-                        type="text"
-                        size="small">
-                        同意请假
-                      </el-button>
-                    </template>
-                  </el-table-column>
-                </el-table> -->
+
                           <template>
                             <el-table
                               :data="tableData3"
@@ -192,60 +155,7 @@
                       </el-table-column>
                     </el-table>
                   </template>
-                </el-tab-pane>
-
-          <el-tab-pane label="会议通知" name="second" style="height: 1000px;">
-            <template>
-              <el-button plain @click="open2">通知1</el-button>
-            </template>
-            <template>
-              <el-button plain @click="open3">通知2</el-button>
-            </template>
-            <div style="position:relative;left:950px;top:500px;">
-              <el-popconfirm title="确定发送以上通知吗">
-                <el-button slot="reference" style="color:blue">发送通知</el-button>
-              </el-popconfirm>
-            </div>
-          </el-tab-pane>
-          <el-tab-pane label="活动通知" name="third">
-            <el-collapse v-model="activeNames" @change="handleChange">
-              <el-collapse-item title="东软集团Matrix分部员工运动大会" name="1">
-                <div>发布时间： 2020-08-13</div>
-                <div>发布内容：</div>
-                <div>2020-08-14 -- 2020-08-20</div>
-                <div>在新世界运动中心举办第十三届东软集团Matrix分部员工运动大会，请所有员工参加，不上班，工资照拿！</div>
-              </el-collapse-item>
-              <el-collapse-item title="东软集团Matrix分部员工表彰大会" name="2">
-                <div>发布时间： 2020-08-13</div>
-                <div>发布内容：</div>
-                <div>2020-08-21</div>
-                <div>在春熙路小龙坎火锅店里举行员工表彰大会，拿钱！</div>
-              </el-collapse-item>
-              <el-collapse-item title="东软集团Matrix分部年度总结大会" name="3">
-                <div>发布时间： 2020-08-13</div>
-                <div>发布内容：</div>
-                <div>2020-08-22</div>
-                <div>在春熙路大龙燚火锅店里举行员工年度大会，快来拿钱！</div>
-              </el-collapse-item>
-              <el-collapse-item title="东软集团Matrix分部聚餐happy" name="4">
-                <div>发布时间： 2020-08-13</div>
-                <div>发布内容：</div>
-                <div>2020-08-23</div>
-                <div>成都Space酒吧Matrix专属卡座，嗨起来！谁先跑谁买单！</div>
-              </el-collapse-item>
-            </el-collapse>
-          </el-tab-pane>
-
-          <el-tab-pane label="工资发放通知" name="fourth">
-            <template>
-              <el-table :data="tableData2" border style="width: 100%">
-                <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-                <el-table-column prop="basic" label="基本工资" width="180"></el-table-column>
-                <el-table-column prop="jiang" label="奖金" width="180"></el-table-column>
-                <el-table-column prop="sum" label="税后总工资"></el-table-column>
-              </el-table>
-            </template>
-          </el-tab-pane>
+                </el-tab-pane>      
         </el-tabs>
       </template>
     </el-tab-pane>
