@@ -1,6 +1,7 @@
 <template>
   <div>
       <el-table :data="tableData" border style="width: 100%">
+      <el-table-column prop="leaveId" label="编号"></el-table-column>
       <el-table-column prop="userId" label="员工编号"></el-table-column>
       <el-table-column prop="leaveName" label="离职员工姓名"></el-table-column>
       <el-table-column prop="bmName" label="部门名称"></el-table-column>
@@ -11,67 +12,71 @@
       <el-table-column prop="leaveReason" label="离职原因"></el-table-column>
       <el-table-column fixed="right" label="操作" width="240">
         <div slot-scope="s">
-          <el-button type="primary" size="small" @click="addorUpdateHandle(s.row.userId)">编辑</el-button>
-          <el-button type="danger" size="small" @click="removeItem(s.row)">删除</el-button>
+          <el-button type="primary" size="small" @click="editItem(s.row.leaveId)">编辑</el-button>
+          <el-button type="danger" size="small" @click="removeItem(s.row.leaveId)">删除</el-button>
         </div>
-        <el-dialog  :visible.sync="menuRoleVisible" append-to-body>
-      <menu-role v-if="menuRoleVisible" ref="menuRole"></menu-role>
-      </el-dialog>
       </el-table-column>
-    </el-table> 
+       </el-table>
+       <Edit :showEditDialog="showEditDialog" @close= "showEditDialog = false" @success="refresh()"/>
   </div>
 </template>
 
 <script>
-import { leave } from "@/api/leave/leave";
-import MenuRole from './MenuRole'
+import { leave,deleteleave } from "@/api/leave/leave";
+import Edit from './Edit';
 export default {
-  components:{
-    MenuRole
-  },
+  components:{Edit},
   data() {
     return {
       tableData: [],
-      menuRoleVisible: false,
+      showEditDialog: false,
+      editUserId: null
     };
   },
-  created() {
-    leave()
+  created() {this.initData();},
+  methods: {
+    initData(){
+      leave()
       .then(r => {
         this.tableData = r;
       })
       .catch(e => {
         console.log(e);
       });
-  },
-  methods: {
-    addorUpdateHandle(userId) {
-      let useId =userId;
-      this.menuRoleVisible =true
-      this.$nextTick(()=>{
-        this.$refs.menuRole.dataInitialization(useId)
-      })
+      },
+    editItem(leaveId){
+      this.editUserId =leaveId;
+      this.showEditDialog = true;
     },
-    removeItem(row) {
+    removeItem(leaveId) {
       this.$confirm("确定删除?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       })
         .then(() => {
-          row.d = 0;
-          // updateStatus({ id: row.id})
-          //   .then(r => {
-          //     this.$message({
-          //       type: "success",
-          //       message: "操作成功!"
-          //     });
-          //     this.refresh();
-          //   })
-          //   .catch(() => {});
+         deleteleave({leaveId})
+             .then(r => {
+              if (r == 1) {
+                this.$message({
+                  type: "success",
+                  message: "操作成功!"
+                });
+                this.refresh();
+              } else {
+                this.$message({
+                  type: "error",
+                  message: "操作失败!"
+                });
+              }
+            })
+        .catch(() => {});
         })
         .catch(() => {});
-    }
+    },
+    refresh() {
+      this.initData();
+    },
   }
 };
 </script>
