@@ -125,7 +125,7 @@
 }
 </style>
 <script>
-import { dataEntry } from "@/api/staffEnro/staffEnro";
+// import { dataEntry } from "@/api/staffEnro/staffEnro";
 export default {
   data() {
     //员工号输入规则
