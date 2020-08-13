@@ -6,7 +6,7 @@
         <el-button style="float: right; padding: 3px 0" type="text">刷新</el-button>
       </div>
       <el-table :data="talentpool" style="width: 100%">
-        <el-table-column prop="name" label="姓名" width="100" align="center"></el-table-column>
+        <el-table-column prop="tname" label="姓名" width="100" align="center"></el-table-column>
         <el-table-column prop="tel" label="电话" width="130" align="center"></el-table-column>
         <el-table-column prop="email" label="邮箱" align="center"></el-table-column>
         <el-table-column prop="idNum" label="证件号" align="center"></el-table-column>
@@ -50,7 +50,7 @@
 }
 </style>
 <script>
-import { talentlist } from "@/api/staffEnro/staffEnro";
+import { talentlistpage } from "@/api/staffEnro/staffEnro";
 export default {
   data() {
     return {
@@ -58,20 +58,21 @@ export default {
       pageSize: 10,
       total: 0,
       talentpool: [],
-      searchParmas: {
-        name: "",
-        tel: ""
-      }
     };
   },
   created() {
     this.initdata();
   },
   methods: {
+    changePage(val){
+      this.pageNo=val;
+      this.initdata();  
+    },
     initdata() {
-      talentlist()
+      talentlistpage({pageNo:this.pageNo,pageSize:this.pageSize})
         .then(r => {
-          this.talentpool = r;
+          this.talentpool = r.talentList;
+          this.total=r.counts;
         })
         .catch(e => {
           console.log(e);
