@@ -32,8 +32,8 @@
          </el-table-column>
 
         <el-table-column  label="查" width="100">
-          <div slot-scope="s">
-            <el-button type="primary" icon="el-icon-search" @click="searchItem(s.row.jnum)"></el-button>
+          <div >
+            <el-button type="primary" icon="el-icon-search" @click="searchItem"></el-button>
           </div>
         </el-table-column>
       
@@ -45,7 +45,6 @@
   
 </el-container>
 <Edit :showEditDialog="showEditDialog" @close="showEditDialog = false" @success="refresh()" />
-<Searc :showSearcDialog="showSearcDialog" @close="showSearcDialog = false" @success="refresh()"/>
 </div>
 </template>
 <style>
@@ -62,14 +61,12 @@
 <script>
 import { myposts ,deletePosi} from "@/api/mypost/mypost";
 import Edit from "./Edit.vue";
-import Searc from "./Searc.vue";
 export default {
   data() {
     return {
        tableData: [] ,
        editjnum:"",
        showEditDialog: false,
-       showSearcDialog:false,
       };   
   },
   created() {
@@ -117,9 +114,8 @@ export default {
         })
         .catch(() => {});
     },
-    searchItem(jnum){
-     this.editjnum=jnum;
-    this.showSearcDialog = true;
+    searchItem(){
+     this.$message.info("待添加");
     },
     toinsert() {
         this.$router.push({ path: "/instpost" ,name:"instPost" });
@@ -129,6 +125,6 @@ export default {
       this.initData();
     },
   },
-  components: {Edit, Searc}
+  components: {Edit}
 };
 </script>

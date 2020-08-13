@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="12" :offset="6">
         <div class="bbb">
-          <div class="demo-blo">
+          <div class="demo-block">
             <el-form
               :model="ruleForm"
               :rules="rules"
@@ -23,7 +23,6 @@
                   <el-date-picker
                     v-model="ruleForm.birthday"
                     align="right"
-                    format="yyyy 年 MM 月 dd 日"
                     value-format="yyyy-MM-dd"
                     type="date"
                     :picker-options="pickerOptions"
@@ -49,7 +48,6 @@
                   <el-date-picker
                     v-model="ruleForm.entrydate"
                     type="date"
-                    format="yyyy 年 MM 月 dd 日"
                     value-format="yyyy-MM-dd"
                     placeholder="选择日期"
                   ></el-date-picker>
@@ -58,7 +56,6 @@
                   <el-date-picker
                     v-model="ruleForm.workdate"
                     type="date"
-                    format="yyyy 年 MM 月 dd 日"
                     value-format="yyyy-MM-dd"
                     placeholder="选择日期"
                   ></el-date-picker>
@@ -105,7 +102,7 @@
   border: 1px solid #444;
   border-radius: 3px;
 }
-.demo-blo {
+.demo-block{
   padding: 20px 50px 20px 35px;
 }
 /* hover选择器 */
@@ -128,7 +125,7 @@
 }
 </style>
 <script>
-// import { dataEntry } from "@/api/staffEnro/staffEnro";
+import { dataEntry } from "@/api/staffEnro/staffEnro";
 export default {
   data() {
     //员工号输入规则
@@ -321,7 +318,7 @@ export default {
         //qs传递数据，后端不需要RequestBody
           .post("staff/dataEntry", this.$qs.stringify(this.ruleForm))
           .then(res => {
-            if (res.data > 0) {
+            if (res == 1) {
               this.$message.success("员工信息已录入");
               this.resetForm();
             } else {

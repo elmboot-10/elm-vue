@@ -71,10 +71,6 @@ export default {
     this.initdata();
   },
   methods: {
-    changePage(val) {
-      this.pageNo = val;
-      this.initdata();
-    },
     initdata() {
       talentlistpage({ pageNo: this.pageNo, pageSize: this.pageSize ,tname: this.tname})
         .then(r => {
