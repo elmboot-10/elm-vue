@@ -14,17 +14,40 @@ export function depts(params) {
     params: params, //注意：如果是get请求请使用 params: params
   });
 }
-  /**
- * 新建部门
+/**
+ * 根据id查询部门
  * @param params
  * @returns {AxiosPromise}
  */
-export function newdepts(params) {
+export function getDeptById(params) {
   return request({
-    // closeLoading: true,
-    // closeInterceptors: true,
-    url: "/dept_manage/newdept",
-    method: "get",
-    params: params, //注意：如果是get请求请使用 params: params
+    url: "/dept_manage/getDeptById",
+    method: "post",
+    data: params, //注意：如果是get请求请使用 params: params
+  });
+}
+/**
+ * 修改部门
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function update(params) {
+  return request({
+    url: "/dept_manage/update",
+    method: "post",
+    data: params, //注意：如果是get请求请使用 params: params
+  });
+}
+
+/**
+ * 删除部门
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export function deleteDept(params) {
+  return request({
+    url: "/dept_manage/delete",
+    method: "post",
+    data: params, //注意：如果是get请求请使用 params: params
   });
 }

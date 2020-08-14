@@ -33,7 +33,7 @@
            
                 <el-form-item class="line">
                       <el-button type="primary" @click="submitForm()">确定</el-button>
-                      <el-button @click="cancel()">取消</el-button>
+                      <el-button @click="cancel()">返回</el-button>
                 </el-form-item> 
         </div>
       </el-form>
@@ -42,22 +42,20 @@
   </el-row>
 </div>
 </template>
-
 <script>
-import { newdepts } from "@/api/deptManage/dept";
 export default {
   data() {
     return {
-      deptForm: [{
-        deptno: 0,
+      deptForm: {
+        deptno: "",
         dname: "",
         location: "",
-        tel: 0,
-        setuptime: ""}],
+        tel: "",
+        setuptime: ""},
         rules: {
         deptno: [
           { required: true, message: "部门编号不能为空", trigger: 'blur' },
-          { min: 2, max: 11, message: "长度至少为1个字符", trigger: 'blur' }
+          { min: 2, max: 11, message: "长度至少为2个字符", trigger: 'blur' }
         ],
          dname: [
            { required: true, message: "部门名称不能为空", trigger: "blur" }
@@ -76,36 +74,40 @@ export default {
       },
     };
   },
-    created() {
-        newdepts()
-          .then(r => {
-            this.tableData = r;
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      },
+   
   methods: {
     submitForm(){
+        this.$refs.deptForm.validate(valid => {
+        if (valid) {
+          this.$message({
+            message: "字段验证通过，创建成功！",
+            type: "success"
+          });
         this.$axios
          .post("dept_manage/insert",this.$qs.stringify(this.deptForm))
          .then(res => {
            if(res.data > 0){
-             this.$message.success("创建成功！");
+            //  this.$message.success("创建成功！");
+              this.$router.push({ path: "/dept_manage/list" });
            }
            else{
              this.$message.error("创建失败！")
            }
          })
          .catch(e => {
-           this.$message.error("服务器内部发生异常")
            console.log(e)
          });
+        }
+})
     },
     cancel(){
        this.$router.push({ path: "/dept_manage/list" });
           },
     checkdeptno(){
+      if(this.deptForm.deptno<10){
+        this.$message.error("长度至少为2个字符")
+        return
+      }
          this.$axios
          .post("dept_manage/isexistdept",this.$qs.stringify({ deptno: this.deptForm.deptno }))
          .then(res => {
