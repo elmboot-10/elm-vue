@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="12" :offset="6">
         <div class="bbb">
-          <div class="demo-block">
+          <div class="demo-blo">
             <el-form
               :model="ruleForm"
               :rules="rules"
@@ -102,7 +102,7 @@
   border: 1px solid #444;
   border-radius: 3px;
 }
-.demo-block{
+.demo-blo{
   padding: 20px 50px 20px 35px;
 }
 /* hover选择器 */
@@ -150,6 +150,7 @@ export default {
           });
       }
     };
+
     //部门输入规则
     var checkDept = (rule, value, callback) => {
       if (value === "") {
@@ -318,7 +319,7 @@ export default {
         //qs传递数据，后端不需要RequestBody
           .post("staff/dataEntry", this.$qs.stringify(this.ruleForm))
           .then(res => {
-            if (res == 1) {
+            if (res.data == 1) {
               this.$message.success("员工信息已录入");
               this.resetForm();
             } else {
